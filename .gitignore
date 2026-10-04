@@ -5,3 +5,8 @@ replit.nix
 __pycache__/
 *.pyc
 .venv/
+.cache/
+.local/
+.upm/
+.config/
+nohup.out
