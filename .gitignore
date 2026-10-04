@@ -1,0 +1,7 @@
+.replit
+.replit.backup
+replit.nix
+.replit.nix
+__pycache__/
+*.pyc
+.venv/
