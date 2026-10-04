@@ -25,10 +25,11 @@
       <div class="row" style="margin-bottom:12px">
         <button class="btn" id="run-btn">▶ Run</button>
         <button class="btn secondary" id="clear-btn">Clear output</button>
+        <button class="btn secondary" id="stop-btn" title="Reload the page to stop a running program">Stop / reset</button>
       </div>
       <div id="turtle-stage" style="display:none"><div id="turtle-canvas"></div></div>
       <div class="terminal" id="terminal">Press Run to execute.</div>
-      <p class="status">Console projects that ask for input will pop up a prompt dialog. Some projects need the network or local files and may not run fully in a browser — errors are shown above.</p>
+      <p class="status">Console projects that ask for input will pop up a prompt dialog. Some projects need the network, images or other files that can't run in a browser — errors are shown above. Use "Stop / reset" to stop a running game.</p>
     </div>
   </div>
 </div>
@@ -70,11 +71,20 @@ function loadScript(src) {
 async function init() {
   if (!slug) throw new Error("No ?slug= given.");
   const mres = await fetch("data/manifest.json");
+  if (!mres.ok) throw new Error(`Could not load the project list (HTTP ${mres.status})`);
   const manifest = await mres.json();
   meta = manifest.find(p => p.slug === slug);
   if (!meta) throw new Error("Unknown project: " + slug);
+  if (meta.type === "tkinter") {
+    // Desktop (tkinter) projects run as hand-written web apps, not here.
+    if (meta.app === false) throw new Error(`"${meta.title}" is a desktop app and its web version hasn't been built yet`);
+    location.replace(`apps/${encodeURIComponent(slug)}/`);
+    return;
+  }
   const dres = await fetch(`data/${encodeURIComponent(slug)}.json`);
+  if (!dres.ok) throw new Error(`Could not load files for "${slug}" (HTTP ${dres.status})`);
   project = await dres.json();
+  if (!project.files || !Object.keys(project.files).length) throw new Error(`"${slug}" has no files`);
 
   document.title = `${meta.title} — 100 Days of Python`;
   document.getElementById("title").textContent = meta.title;
@@ -109,56 +119,122 @@ async function init() {
   document.getElementById("app").style.display = "block";
   runBtn.onclick = runProject;
   document.getElementById("clear-btn").onclick = clearTerminal;
+  document.getElementById("stop-btn").onclick = () => location.reload();
+  if (meta.type === "turtle") {
+    // Keep arrow keys / space from scrolling the page while playing turtle games.
+    window.addEventListener("keydown", (e) => {
+      if (runBtn.disabled && ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key) &&
+          !/INPUT|TEXTAREA|BUTTON/.test((e.target && e.target.tagName) || "")) e.preventDefault();
+    });
+  }
 }
 
 // ---------- Console: Pyodide ----------
-async function ensurePyodide() {
-  if (pyodide) return pyodide;
-  runBtn.disabled = true;
-  runBtn.textContent = "Loading Python…";
-  await loadScript(PYODIDE_URL);
-  pyodide = await loadPyodide();
-  pyodide.setStdout({ batched: (s) => termPrint(s) });
-  pyodide.setStderr({ batched: (s) => termPrint(s, "err") });
-  // input() -> blocking browser prompt dialog
-  await pyodide.runPythonAsync(`
-import builtins, js
+// Python-side helpers: input() via prompt dialog, a stand-in for Replit's
+// `replit.clear`, os.system("clear"), and per-run cleanup so Run can be pressed repeatedly.
+const BOOTSTRAP_PY = String.raw`
+import builtins, os, sys, types, shutil, js
+
+def _clear_screen(*_a, **_k):
+    js.window.clearTerminal()
+
 def _web_input(prompt=""):
     text = "" if prompt is None else str(prompt)
     if text:
-        print(text, end="")
+        sys.stdout.write(text)
+        sys.stdout.flush()
     v = js.window.prompt(text)
     if v is None:
         raise EOFError("input cancelled by user")
     print(v)
     return v
 builtins.input = _web_input
-`);
-  runBtn.disabled = false;
-  runBtn.textContent = "▶ Run";
+
+_replit = types.ModuleType("replit")
+_replit.clear = _clear_screen
+sys.modules["replit"] = _replit
+
+_real_system = os.system
+def _system(cmd):
+    if str(cmd).strip() in ("clear", "cls"):
+        _clear_screen()
+        return 0
+    return 0
+os.system = _system
+
+PROJECT_DIR = "/home/pyodide/project"
+
+def _prepare_run():
+    """Fresh project dir + forget modules imported from a previous run."""
+    os.chdir("/home/pyodide")
+    for name, mod in list(sys.modules.items()):
+        f = getattr(mod, "__file__", None) or ""
+        if f.startswith(PROJECT_DIR + "/"):
+            del sys.modules[name]
+    shutil.rmtree(PROJECT_DIR, ignore_errors=True)
+    os.makedirs(PROJECT_DIR)
+    os.chdir(PROJECT_DIR)
+    if PROJECT_DIR not in sys.path:
+        sys.path.insert(0, PROJECT_DIR)
+`;
+
+async function ensurePyodide() {
+  if (pyodide) return pyodide;
+  runBtn.disabled = true;
+  runBtn.textContent = "Loading Python…";
+  try {
+    await loadScript(PYODIDE_URL);
+    pyodide = await loadPyodide();
+    // Stream raw chunks so partial lines (e.g. input prompts) show immediately and
+    // newlines are preserved ("batched" mode strips them).
+    const dec = new TextDecoder();
+    pyodide.setStdout({ write: (buf) => { termPrint(dec.decode(buf, { stream: true })); return buf.length; } });
+    pyodide.setStderr({ write: (buf) => { termPrint(dec.decode(buf, { stream: true }), "err"); return buf.length; } });
+    window.clearTerminal = clearTerminal;
+    await pyodide.runPythonAsync(BOOTSTRAP_PY);
+  } catch (e) {
+    pyodide = null;
+    throw e;
+  } finally {
+    runBtn.disabled = false;
+    runBtn.textContent = "▶ Run";
+  }
   return pyodide;
 }
 
 async function runConsole() {
   const py = await ensurePyodide();
   clearTerminal();
-  // Write every project file into the virtual FS so imports + data files work.
-  for (const [name, content] of Object.entries(project.files)) {
-    const parts = name.split("/");
-    let dir = "";
-    for (let i = 0; i < parts.length - 1; i++) {
-      dir += (dir ? "/" : "") + parts[i];
-      try { py.FS.mkdir(dir); } catch (e) { /* exists */ }
-    }
-    try { py.FS.writeFile(name, content); } catch (e) { termPrint(`(skip ${name}: ${e.message})\n`, "err"); }
-  }
   runBtn.disabled = true;
   runBtn.textContent = "Running…";
   try {
-    await py.runPythonAsync(project.files[meta.entry] || Object.values(project.files)[0]);
+    py.runPython("_prepare_run()");
+    // Write every project file into the virtual FS so imports + data files work.
+    for (const [name, content] of Object.entries(project.files)) {
+      const parts = name.split("/");
+      let dir = "/home/pyodide/project";
+      for (let i = 0; i < parts.length - 1; i++) {
+        dir += "/" + parts[i];
+        try { py.FS.mkdir(dir); } catch (e) { /* exists */ }
+      }
+      py.FS.writeFile("/home/pyodide/project/" + name, content);
+    }
+    const code = project.files[meta.entry] || Object.values(project.files)[0];
+    // Install any Pyodide-provided packages the project imports (pandas, etc.).
+    const allSrc = Object.entries(project.files).filter(([n]) => n.endsWith(".py")).map(([, c]) => c);
+    try { await py.loadPackagesFromImports(allSrc.join("\n")); } catch (e) { /* best effort */ }
+    // Fresh globals each run, and behave like `python main.py`.
+    const globals = py.globals.get("dict")();
+    globals.set("__name__", "__main__");
+    globals.set("__file__", "/home/pyodide/project/" + meta.entry);
+    try {
+      await py.runPythonAsync(code, { globals });
+    } finally {
+      globals.destroy();
+    }
     termPrint("\n— finished —\n");
   } catch (e) {
-    termPrint(String(e && e.message ? e.message : e) + "\n", "err");
+    termPrint("\n" + String(e && e.message ? e.message : e) + "\n", "err");
   } finally {
     runBtn.disabled = false;
     runBtn.textContent = "▶ Run";
@@ -170,58 +246,111 @@ async function ensureSkulpt() {
   if (skulptLoaded) return;
   runBtn.disabled = true;
   runBtn.textContent = "Loading runtime…";
-  for (const u of SKULPT_URLS) await loadScript(u);
-  skulptLoaded = true;
-  runBtn.disabled = false;
-  runBtn.textContent = "▶ Run";
+  try {
+    for (const u of SKULPT_URLS) await loadScript(u);
+    skulptLoaded = true;
+  } finally {
+    runBtn.disabled = false;
+    runBtn.textContent = "▶ Run";
+  }
 }
 
-function runTurtle() {
-  return ensureSkulpt().then(() => {
-    clearTerminal();
-    document.getElementById("turtle-canvas").innerHTML = "";
-    // Map both "snake" and "snake.py" so Skulpt imports resolve.
-    const pf = {};
-    for (const [name, content] of Object.entries(project.files)) {
-      const base = name.split("/").pop();
-      pf[base] = content;
-      pf[base.replace(/\.py$/, "")] = content;
+let turtleCompat = null;   // docs/turtle_compat.py (fills gaps in Skulpt's turtle)
+
+async function runTurtle() {
+  await ensureSkulpt();
+  if (turtleCompat === null) {
+    try {
+      const r = await fetch("turtle_compat.py");
+      turtleCompat = r.ok ? await r.text() : "";
+    } catch (e) { turtleCompat = ""; }
+  }
+  clearTerminal();
+  document.getElementById("turtle-canvas").innerHTML = "";
+  // Map both "snake" and "snake.py" so Skulpt imports resolve.
+  const pf = {};
+  for (const [name, content] of Object.entries(project.files)) {
+    const base = name.split("/").pop();
+    pf[name] = content;
+    pf[base] = content;
+    pf[base.replace(/\.py$/, "")] = content;
+  }
+  // Skulpt's open() reads data files from hidden <textarea id="filename"> elements.
+  document.querySelectorAll("textarea.skulpt-file").forEach(t => t.remove());
+  for (const [name, content] of Object.entries(project.files)) {
+    if (name.endsWith(".py")) continue;
+    for (const id of new Set([name, name.split("/").pop()])) {
+      const ta = document.createElement("textarea");
+      ta.id = id; ta.className = "skulpt-file"; ta.value = content; ta.style.display = "none";
+      document.body.appendChild(ta);
     }
-    (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "turtle-canvas";
-    Sk.configure({
-      output: (t) => termPrint(t),
-      read: (x) => {
-        if (pf[x] !== undefined) return pf[x];
-        if (Sk.builtinFiles && Sk.builtinFiles.files[x] !== undefined)
-          return Sk.builtinFiles.files[x];
-        throw "File not found: '" + x + "'";
-      },
-      __future__: Sk.python3
-    });
-    runBtn.disabled = true;
-    runBtn.textContent = "Running…";
-    const code = project.files[meta.entry] || Object.values(project.files)[0];
-    Sk.misceval.asyncToPromise(() =>
-      Sk.importMainWithBody("<stdin>", false, code, true)
-    ).then(
-      () => { termPrint("\n— finished —\n"); },
-      (err) => { termPrint((err && err.toString ? err.toString() : String(err)) + "\n", "err"); }
-    ).finally(() => {
-      runBtn.disabled = false;
-      runBtn.textContent = "▶ Run";
-    });
+  }
+  (Sk.TurtleGraphics || (Sk.TurtleGraphics = {})).target = "turtle-canvas";
+  Sk.configure({
+    output: (t) => termPrint(t),
+    read: (x) => {
+      // Skulpt asks for user modules as "./name.py" (and "./pkg/__init__.py").
+      const key = String(x).replace(/^(\.\/)+/, "");
+      if (pf[key] !== undefined) return pf[key];
+      if (pf[x] !== undefined) return pf[x];
+      if (Sk.builtinFiles && Sk.builtinFiles.files[x] !== undefined)
+        return Sk.builtinFiles.files[x];
+      throw "File not found: '" + x + "'";
+    },
+    inputfun: (prompt) => {
+      const v = window.prompt(prompt);
+      return v === null ? "" : v;
+    },
+    inputfunTakesPrompt: true,
+    __future__: Sk.python3
   });
+  runBtn.disabled = true;
+  runBtn.textContent = "Running…";
+  const code = project.files[meta.entry] || Object.values(project.files)[0];
+  try {
+    if (turtleCompat) {
+      try {
+        if (Sk._origOpen) Sk.builtins.open = Sk._origOpen;
+        const m = await Sk.misceval.asyncToPromise(() =>
+          Sk.importMainWithBody("<compat>", false, turtleCompat, true));
+        if (!Sk._origOpen) Sk._origOpen = Sk.builtins.open;
+        if (m && m.$d && m.$d._cp_open) Sk.builtins.open = m.$d._cp_open;
+      } catch (e) {
+        console.warn("turtle compat layer failed to load", e);
+      }
+    }
+    await Sk.misceval.asyncToPromise(() =>
+      Sk.importMainWithBody("<stdin>", false, code, true));
+    termPrint("\n— finished —\n");
+  } catch (err) {
+    termPrint((err && err.toString ? err.toString() : String(err)) + "\n", "err");
+  } finally {
+    runBtn.disabled = false;
+    runBtn.textContent = "▶ Run";
+  }
 }
 
 function runProject() {
-  if (meta.type === "turtle") return runTurtle();
-  return runConsole();
+  const p = meta.type === "turtle" ? runTurtle() : runConsole();
+  return Promise.resolve(p).catch((e) => {
+    runBtn.disabled = false;
+    runBtn.textContent = "▶ Run";
+    termPrint("\nCould not start: " + String(e && e.message ? e.message : e) + "\n", "err");
+  });
 }
 
 init().catch(err => {
-  document.getElementById("loading").innerHTML =
-    `<span class="err" style="color:#b91c1c">Could not load project: ${String(err.message || err)}.<br>` +
-    `<a class="back-link" href="index.html">← Back to all projects</a></span>`;
+  const box = document.getElementById("loading");
+  box.textContent = "";
+  const msg = document.createElement("span");
+  msg.className = "err";
+  msg.style.color = "#b91c1c";
+  msg.textContent = "Could not load project: " + String(err.message || err) + ".";
+  const back = document.createElement("a");
+  back.className = "back-link";
+  back.href = "index.html";
+  back.textContent = "\u2190 Back to all projects";
+  box.append(msg, document.createElement("br"), back);
   console.error(err);
 });
 </script>

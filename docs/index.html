@@ -42,6 +42,7 @@ let activeFilter = "all";
 
 async function load() {
   const res = await fetch("data/manifest.json");
+  if (!res.ok) throw new Error("HTTP " + res.status);
   projects = await res.json();
   // Sort: turtle + tkinter showcases first, then alphabetical.
   const rank = { turtle: 0, tkinter: 1, console: 2 };
@@ -58,7 +59,7 @@ async function load() {
 }
 
 function targetFor(p) {
-  return p.type === "tkinter" ? `apps/${p.slug}/` : `run.html?slug=${encodeURIComponent(p.slug)}`;
+  return p.type === "tkinter" ? `apps/${encodeURIComponent(p.slug)}/` : `run.html?slug=${encodeURIComponent(p.slug)}`;
 }
 
 function render() {
@@ -79,7 +80,9 @@ function render() {
       `<span class="badge ${p.type}">${TYPE_LABEL[p.type]}</span>` +
       `<h3></h3>` +
       `<div class="meta">${p.files.length} file${p.files.length === 1 ? "" : "s"}</div>` +
-      `<a class="run-btn" href="${targetFor(p)}">${action} →</a>`;
+      (p.type === "tkinter" && p.app === false
+        ? `<span class="meta">Web version coming soon</span>`
+        : `<a class="run-btn" href="${targetFor(p)}">${action} →</a>`);
     card.querySelector("h3").textContent = p.title;
     grid.appendChild(card);
   }
