@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Widget Examples — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  .demo-grid { display: grid; gap: 18px; max-width: 560px; }
+  .demo-grid .panel { margin-bottom: 0; }
+  .demo-grid .panel h3 { margin: 0 0 10px; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <h1>Widget Examples</h1>
+  <p class="status">Web version of the tkinter widget demo — every widget from the original, with an output log standing in for <code>print()</code>.</p>
+
+  <div class="demo-grid">
+    <div class="panel"><h3>Label</h3><div id="demo-label">This is new text</div></div>
+
+    <div class="panel"><h3>Button</h3>
+      <button class="btn" id="demo-button">Click Me</button>
+    </div>
+
+    <div class="panel"><h3>Entry</h3>
+      <input type="text" id="demo-entry" value="Some text to begin with." style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px">
+      <div class="row" style="margin-top:8px"><button class="btn secondary" id="entry-get">Get value</button></div>
+    </div>
+
+    <div class="panel"><h3>Text (multi-line)</h3>
+      <textarea id="demo-text" rows="5" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px">Example of multi-line text entry.</textarea>
+      <div class="row" style="margin-top:8px"><button class="btn secondary" id="text-get">Get value</button></div>
+    </div>
+
+    <div class="panel"><h3>Spinbox (0–10)</h3>
+      <input type="number" id="demo-spin" min="0" max="10" value="0" style="width:90px;padding:10px;border:1px solid var(--border);border-radius:8px">
+    </div>
+
+    <div class="panel"><h3>Scale (0–100)</h3>
+      <input type="range" id="demo-scale" min="0" max="100" value="0" style="width:100%">
+      <div class="status">Value: <span id="scale-val">0</span></div>
+    </div>
+
+    <div class="panel"><h3>Checkbutton</h3>
+      <label><input type="checkbox" id="demo-check"> Is On?</label>
+    </div>
+
+    <div class="panel"><h3>Radiobuttons</h3>
+      <label style="display:block"><input type="radio" name="demo-radio" value="1"> Option1</label>
+      <label style="display:block"><input type="radio" name="demo-radio" value="2"> Option2</label>
+    </div>
+
+    <div class="panel"><h3>Listbox</h3>
+      <select id="demo-list" size="4" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:8px">
+        <option>Apple</option><option>Pear</option><option>Orange</option><option>Banana</option>
+      </select>
+    </div>
+
+    <div class="panel"><h3>Output (print log)</h3><div class="log-box" id="demo-log"></div></div>
+  </div>
+  <div style="height:40px"></div>
+</div>
+<script>
+const logBox = document.getElementById("demo-log");
+function log(v) { logBox.textContent += v + "\n"; logBox.scrollTop = logBox.scrollHeight; }
+
+document.getElementById("demo-button").addEventListener("click", () => log("Do something"));
+document.getElementById("entry-get").addEventListener("click", () =>
+  log(document.getElementById("demo-entry").value));
+document.getElementById("text-get").addEventListener("click", () =>
+  log(document.getElementById("demo-text").value));
+document.getElementById("demo-spin").addEventListener("change", (e) => log(e.target.value));
+const scale = document.getElementById("demo-scale");
+scale.addEventListener("input", (e) => {
+  document.getElementById("scale-val").textContent = e.target.value;
+  log(e.target.value);
+});
+document.getElementById("demo-check").addEventListener("change", (e) => log(e.target.checked ? 1 : 0));
+document.querySelectorAll('input[name="demo-radio"]').forEach(r =>
+  r.addEventListener("change", (e) => log(e.target.value)));
+document.getElementById("demo-list").addEventListener("change", (e) => log(e.target.value));
+</script>
+</body>
+</html>

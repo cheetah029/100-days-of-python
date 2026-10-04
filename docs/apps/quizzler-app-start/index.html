@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quizzler — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+<style> body { background: #375362; color: #fff; } body .panel { background: transparent; border: none; } </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html" style="color:#93c5fd">← Back to all projects</a>
+  <h1 style="color:#fff">Quizzler</h1>
+  <p class="status" style="color:#c3cede">Web version of the tkinter quiz app. 10 true/false questions from the Open Trivia DB (bundled fallback if offline).</p>
+  <div class="panel" style="max-width:560px;margin:0 auto">
+    <p style="text-align:right;font-weight:700" id="score">Score: 0</p>
+    <div class="quiz-card" id="quiz-card"><span id="question">Loading questions…</span></div>
+    <div class="row" style="justify-content:center;margin-top:16px">
+      <button class="btn" id="true-btn" style="font-size:1.3rem;padding:12px 34px;background:var(--green)">True</button>
+      <button class="btn" id="false-btn" style="font-size:1.3rem;padding:12px 34px;background:#dc2626">False</button>
+    </div>
+  </div>
+  <div style="height:40px"></div>
+</div>
+<script>
+// Bundled fallback (same shape as Open Trivia DB boolean questions).
+const FALLBACK = [
+  { q: "The Python programming language is named after a snake.", a: "False" },
+  { q: "HTML stands for HyperText Markup Language.", a: "True" },
+  { q: "The Great Wall of China is visible from the Moon.", a: "False" },
+  { q: "Light travels faster than sound.", a: "True" },
+  { q: "There are 206 bones in the adult human body.", a: "True" },
+  { q: "The capital of Australia is Sydney.", a: "False" },
+  { q: "Water boils at 100 degrees Celsius at sea level.", a: "True" },
+  { q: "The first computer programmer was Ada Lovelace.", a: "True" },
+  { q: "Bats are blind.", a: "False" },
+  { q: "The currency of Japan is the yuan.", a: "False" },
+];
+
+let questions = [], qIndex = 0, score = 0, accepting = false;
+const card = document.getElementById("quiz-card");
+const questionEl = document.getElementById("question");
+const scoreEl = document.getElementById("score");
+const trueBtn = document.getElementById("true-btn");
+const falseBtn = document.getElementById("false-btn");
+
+function decode(s) {
+  const t = document.createElement("textarea");
+  t.innerHTML = s;
+  return t.value;
+}
+
+async function loadQuestions() {
+  try {
+    const res = await fetch("https://opentdb.com/api.php?amount=10&type=boolean");
+    if (!res.ok) throw new Error("bad status");
+    const data = await res.json();
+    if (data.response_code !== 0 || !data.results.length) throw new Error("bad payload");
+    questions = data.results.map(r => ({ q: decode(r.question), a: r.correct_answer }));
+  } catch (e) {
+    questions = FALLBACK.slice();
+  }
+  nextQuestion();
+}
+
+function setButtons(on) {
+  trueBtn.disabled = falseBtn.disabled = !on;
+  accepting = on;
+}
+
+function nextQuestion() {
+  card.style.background = "#fff";
+  scoreEl.textContent = `Score: ${score}`;
+  if (qIndex < questions.length) {
+    questionEl.textContent = `Q.${qIndex + 1}: ${questions[qIndex].q}`;
+    setButtons(true);
+  } else {
+    questionEl.textContent = `You've reached the end of the quiz. Final score: ${score}/${questions.length}`;
+    setButtons(false);
+  }
+}
+
+function answer(userAnswer) {
+  if (!accepting) return;
+  setButtons(false);
+  const correct = questions[qIndex].a.toLowerCase() === userAnswer.toLowerCase();
+  if (correct) { score++; card.style.background = "#16a34a"; }
+  else { card.style.background = "#dc2626"; }
+  qIndex++;
+  setTimeout(nextQuestion, 1000);
+}
+
+trueBtn.addEventListener("click", () => answer("True"));
+falseBtn.addEventListener("click", () => answer("False"));
+loadQuestions();
+</script>
+</body>
+</html>

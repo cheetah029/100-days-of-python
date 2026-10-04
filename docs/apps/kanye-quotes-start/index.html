@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanye Says… — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <h1>Kanye Says…</h1>
+  <p class="status">Web version of the tkinter app. Fetches from <code>api.kanye.rest</code>, with bundled quotes if offline.</p>
+  <div class="panel" style="max-width:640px;margin:0 auto;text-align:center">
+    <div class="quote-box" id="quote" style="text-align:left">Kanye Quote Goes HERE</div>
+    <button class="btn" id="new-quote" style="font-size:1.2rem;padding:14px 30px">🎤 New quote</button>
+  </div>
+  <div style="height:40px"></div>
+</div>
+<script>
+const FALLBACK = [
+  "I am the number one human being in music. That means any person that is living or breathing is number two.",
+  "My greatest pain in life is that I will never be able to see myself perform live.",
+  "I feel like I'm too busy writing history to read it.",
+  "I am Warhol. I am the number one most impactful artist of our generation.",
+  "If you have the opportunity to play this game of life you need to appreciate every moment.",
+  "People always say that you can't please everybody. I think that's a cop-out.",
+  "I refuse to accept other people's ideas of happiness for me. As if there's a one size fits all standard for happiness.",
+  "Keep your nose out the sky, keep your heart to god, and keep your face to the rising sun.",
+  "I still think I am the greatest.",
+  "For me, money is not my definition of success. Inspiring people is a definition of success.",
+  "I love sleep; it's my favorite.",
+  "The world is our office."
+];
+
+const quoteEl = document.getElementById("quote");
+const btn = document.getElementById("new-quote");
+
+async function getQuote() {
+  btn.disabled = true;
+  try {
+    const res = await fetch("https://api.kanye.rest/");
+    if (!res.ok) throw new Error("bad status");
+    const data = await res.json();
+    if (!data.quote) throw new Error("bad payload");
+    quoteEl.textContent = "\u201C" + data.quote + "\u201D";
+  } catch (e) {
+    quoteEl.textContent = "\u201C" + FALLBACK[Math.floor(Math.random() * FALLBACK.length)] + "\u201D";
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+btn.addEventListener("click", getQuote);
+getQuote();
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+[
+  {
+    "slug": "day-2-3-exercise",
+    "title": "Day 2-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "flight-club",
+    "title": "Flight Club",
+    "type": "console",
+    "files": [
+      "VENV.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "exercise-tracking-end",
+    "title": "Exercise Tracking End",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "quizzler-app-start",
+    "title": "Quizzler App Start",
+    "type": "tkinter",
+    "files": [
+      "data.py",
+      "main.py",
+      "question_model.py",
+      "quiz_brain.py",
+      "ui.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "kanye-quotes-start",
+    "title": "Kanye Quotes Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "flash-card-project-start",
+    "title": "Flash Card Project Start",
+    "type": "tkinter",
+    "files": [
+      "data/french_words.csv",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "password-manager-start",
+    "title": "Password Manager Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-30-2-exercise",
+    "title": "Day 30-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "pomodoro-start",
+    "title": "Pomodoro Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "tkinter-widget-demo",
+    "title": "Tkinter Widget Demo",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "NATO-alphabet-start",
+    "title": "Nato Alphabet Start",
+    "type": "console",
+    "files": [
+      "main.py",
+      "nato_phonetic_alphabet.csv"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-26-4-exercise",
+    "title": "Day 26-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-26-3-test-your-code",
+    "title": "Day 26-3 Test Your Code",
+    "type": "console",
+    "files": [
+      "README.md",
+      "file1.txt",
+      "file2.txt",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-26-3-exercise",
+    "title": "Day 26-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "file1.txt",
+      "file2.txt",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-26-1-exercise",
+    "title": "Day 26-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "us-states-game-start",
+    "title": "Us States Game Start",
+    "type": "turtle",
+    "files": [
+      "50_states.csv",
+      "main.py",
+      "states_to_learn.csv"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "mail-merge-project-start",
+    "title": "Mail Merge Project Start",
+    "type": "console",
+    "files": [
+      "Input/Letters/starting_letter.txt",
+      "Input/Names/invited_names.txt",
+      "Output/ReadyToSend/example.txt",
+      "Output/ReadyToSend/letter_for_Aang.txt",
+      "Output/ReadyToSend/letter_for_Appa.txt",
+      "Output/ReadyToSend/letter_for_Katara.txt",
+      "Output/ReadyToSend/letter_for_Momo.txt",
+      "Output/ReadyToSend/letter_for_Sokka.txt",
+      "Output/ReadyToSend/letter_for_Toph.txt",
+      "Output/ReadyToSend/letter_for_Uncle Iroh.txt",
+      "Output/ReadyToSend/letter_for_Zuko.txt",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "snake-game",
+    "title": "Snake Game",
+    "type": "turtle",
+    "files": [
+      "data.txt",
+      "food.py",
+      "main.py",
+      "scoreboard.py",
+      "snake.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "turtle-race-start",
+    "title": "Turtle Race Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "etch-a-sketch-start",
+    "title": "Etch A Sketch Start",
+    "type": "turtle",
+    "files": [
+      "etch-a-sketch-start/main.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "hirst_painting-start",
+    "title": "Hirst Painting Start",
+    "type": "turtle",
+    "files": [
+      "hirstpainting-start/main.py",
+      "hirstpainting-start/nohup.out"
+    ],
+    "entry": "hirstpainting-start/main.py"
+  },
+  {
+    "slug": "day-18-5-start",
+    "title": "Day 18-5 Start",
+    "type": "console",
+    "files": [
+      "day-18-5-start/main.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-18-4-start",
+    "title": "Day 18-4 Start",
+    "type": "console",
+    "files": [
+      "day-18-4-start/main.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-18-3-start",
+    "title": "Day 18-3 Start",
+    "type": "console",
+    "files": [
+      "day-18-3-start/main.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "quiz-game-start",
+    "title": "Quiz Game Start",
+    "type": "console",
+    "files": [
+      "data.py",
+      "main.py",
+      "question_model.py",
+      "quiz-game-start/data.py",
+      "quiz-game-start/main.py",
+      "quiz-game-start/question_model.py",
+      "quiz-game-start/quiz_brain.py",
+      "quiz_brain.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "oop-coffee-machine-start",
+    "title": "Oop Coffee Machine Start",
+    "type": "console",
+    "files": [
+      "coffee_maker.py",
+      "main.py",
+      "menu.py",
+      "money_machine.py",
+      "oop-coffee-machine-start/coffee_maker.py",
+      "oop-coffee-machine-start/main.py",
+      "oop-coffee-machine-start/menu.py",
+      "oop-coffee-machine-start/money_machine.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "coffee-machine-start",
+    "title": "Coffee Machine Start",
+    "type": "console",
+    "files": [
+      "coffee-machine-start/main.py"
+    ],
+    "entry": "coffee-machine-start/main.py"
+  },
+  {
+    "slug": "day-9-start",
+    "title": "Day 9 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "caesar-cipher-4-start",
+    "title": "Caesar Cipher 4 Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  }
+]

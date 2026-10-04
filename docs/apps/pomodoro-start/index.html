@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pomodoro — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  body { background: #f7f5dd; }
+  .pomo-title { text-align: center; font-family: Courier, monospace; font-size: 2.6rem; margin: 6px 0; color: #9bdeac; }
+  .tomato { text-align: center; font-size: 5rem; line-height: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <div class="panel" style="max-width:560px;margin:0 auto;background:#f7f5dd">
+    <div class="pomo-title" id="title-label">Timer</div>
+    <div class="tomato">🍅</div>
+    <div class="timer-display" id="timer-text" style="color:#1c2333">00:00</div>
+    <div class="row" style="justify-content:center;margin:12px 0">
+      <button class="btn" id="start-btn">Start</button>
+      <button class="btn secondary" id="reset-btn">Reset</button>
+    </div>
+    <div class="checkmarks" id="check-marks"></div>
+    <p class="status" style="text-align:center">25 min work → 5 min break, long 20 min break every 4th work session.</p>
+  </div>
+</div>
+<script>
+// Faithful port of the tkinter Pomodoro (main.py):
+// WORK_MIN=25, SHORT_BREAK_MIN=5, LONG_BREAK_MIN=20.
+// reps increments each session; rep 8,16.. = long break; even reps = short break; odd = work.
+const PINK = "#e2979c", RED = "#e7305b", GREEN = "#9bdeac";
+const WORK_SECS = 25 * 60, SHORT_BREAK_SECS = 5 * 60, LONG_BREAK_SECS = 20 * 60;
+
+let reps = 0;
+let timerId = null;
+const titleLabel = document.getElementById("title-label");
+const timerText = document.getElementById("timer-text");
+const checkMarks = document.getElementById("check-marks");
+
+function fmt(count) {
+  const m = Math.floor(count / 60);
+  const s = count % 60;
+  return `${m}:${s < 10 ? "0" + s : s}`;
+}
+
+function countDown(count) {
+  timerText.textContent = fmt(count);
+  if (count > 0) {
+    timerId = setTimeout(() => countDown(count - 1), 1000);
+  } else {
+    startTimer();
+    const workSessions = Math.floor(reps / 2);
+    checkMarks.textContent = "✔".repeat(workSessions);
+  }
+}
+
+function startTimer() {
+  reps += 1;
+  if (reps % 8 === 0) {
+    titleLabel.textContent = "Break"; titleLabel.style.color = RED;
+    countDown(LONG_BREAK_SECS);
+  } else if (reps % 2 === 0) {
+    titleLabel.textContent = "Break"; titleLabel.style.color = PINK;
+    countDown(SHORT_BREAK_SECS);
+  } else {
+    titleLabel.textContent = "Work"; titleLabel.style.color = GREEN;
+    countDown(WORK_SECS);
+  }
+}
+
+function resetTimer() {
+  clearTimeout(timerId);
+  timerId = null;
+  timerText.textContent = "00:00";
+  titleLabel.textContent = "Timer";
+  titleLabel.style.color = GREEN;
+  checkMarks.textContent = "";
+  reps = 0;
+}
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  if (timerId === null) startTimer();
+});
+document.getElementById("reset-btn").addEventListener("click", resetTimer);
+</script>
+</body>
+</html>

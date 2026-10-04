@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashy — French Flashcards — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+<style> body { background: #B1DDC6; } </style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <h1>Flashy — French Flashcards</h1>
+  <p class="status">Web version of the tkinter flashcard app. The card flips after 3 seconds. ✗ = still learning, ✓ = known (removed from the deck, saved in this browser).</p>
+  <p class="status">Cards left: <strong id="left-count"></strong></p>
+
+  <div class="flashcard" id="card">
+    <div class="flashcard-inner">
+      <div class="flashcard-face flashcard-front">
+        <div class="lang" id="card-lang">French</div>
+        <div class="word" id="card-word">…</div>
+      </div>
+      <div class="flashcard-face flashcard-back">
+        <div class="lang">English</div>
+        <div class="word" id="card-back-word">…</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="justify-content:center">
+    <button class="btn secondary" id="unknown-btn" style="font-size:1.4rem">✗ Still learning</button>
+    <button class="btn" id="known-btn" style="font-size:1.4rem;background:var(--green)">✓ I know it</button>
+  </div>
+  <div class="row" style="justify-content:center;margin-top:10px">
+    <button class="btn secondary" id="reset-deck">Reset deck</button>
+  </div>
+  <div style="height:40px"></div>
+</div>
+<script>
+const WORDS = [{"f": "partie", "e": "part"}, {"f": "histoire", "e": "history"}, {"f": "chercher", "e": "search"}, {"f": "seulement", "e": "only"}, {"f": "police", "e": "police"}, {"f": "pensais", "e": "thought"}, {"f": "aide", "e": "help"}, {"f": "demande", "e": "request"}, {"f": "genre", "e": "kind"}, {"f": "mois", "e": "month"}, {"f": "frère", "e": "brother"}, {"f": "laisser", "e": "let"}, {"f": "car", "e": "because"}, {"f": "mettre", "e": "to put"}, {"f": "aucun", "e": "no"}, {"f": "laisse", "e": "leash"}, {"f": "eux", "e": "them"}, {"f": "ville", "e": "city"}, {"f": "chaque", "e": "each"}, {"f": "parlé", "e": "speak"}, {"f": "arrivé", "e": "come"}, {"f": "devrait", "e": "should"}, {"f": "bébé", "e": "baby"}, {"f": "longtemps", "e": "long time"}, {"f": "heures", "e": "hours"}, {"f": "vont", "e": "will"}, {"f": "pendant", "e": "while"}, {"f": "revoir", "e": "meet again"}, {"f": "aucune", "e": "any"}, {"f": "place", "e": "square"}, {"f": "parle", "e": "speak"}, {"f": "compris", "e": "understood"}, {"f": "savais", "e": "knew"}, {"f": "étaient", "e": "were"}, {"f": "attention", "e": "Warning"}, {"f": "voici", "e": "here is"}, {"f": "pourrais", "e": "could"}, {"f": "affaire", "e": "case"}, {"f": "donner", "e": "give"}, {"f": "type", "e": "type"}, {"f": "leurs", "e": "their"}, {"f": "donné", "e": "given"}, {"f": "train", "e": "train"}, {"f": "corps", "e": "body"}, {"f": "endroit", "e": "place"}, {"f": "yeux", "e": "eyes"}, {"f": "façon", "e": "way"}, {"f": "écoute", "e": "listen"}, {"f": "dont", "e": "whose"}, {"f": "trouve", "e": "find"}, {"f": "premier", "e": "first"}, {"f": "perdu", "e": "lost"}, {"f": "main", "e": "hand"}, {"f": "première", "e": "first"}, {"f": "côté", "e": "side"}, {"f": "pouvoir", "e": "power"}, {"f": "vieux", "e": "old"}, {"f": "sois", "e": "be"}, {"f": "tiens", "e": "here"}, {"f": "matin", "e": "morning"}, {"f": "tellement", "e": "so much"}, {"f": "enfant", "e": "child"}, {"f": "point", "e": "point"}, {"f": "venu", "e": "came"}, {"f": "suite", "e": "after"}, {"f": "pardon", "e": "sorry"}, {"f": "venez", "e": "come"}, {"f": "devant", "e": "in front of"}, {"f": "vers", "e": "towards"}, {"f": "minutes", "e": "minutes"}, {"f": "demandé", "e": "request"}, {"f": "chambre", "e": "bedroom"}, {"f": "mis", "e": "placed"}, {"f": "belle", "e": "beautiful"}, {"f": "droit", "e": "law"}, {"f": "aimerais", "e": "would like to"}, {"f": "aujourd'hui", "e": "today"}, {"f": "mari", "e": "husband"}, {"f": "cause", "e": "cause"}, {"f": "enfin", "e": "finally"}, {"f": "espère", "e": "hope"}, {"f": "eau", "e": "water"}, {"f": "attendez", "e": "Wait"}, {"f": "parti", "e": "left"}, {"f": "nouvelle", "e": "new"}, {"f": "boulot", "e": "job"}, {"f": "arrêter", "e": "Stop"}, {"f": "dirait", "e": "would say"}, {"f": "terre", "e": "Earth"}, {"f": "compte", "e": "account"}, {"f": "donne", "e": "given"}, {"f": "loin", "e": "far"}, {"f": "fin", "e": "end"}, {"f": "croire", "e": "believe"}, {"f": "chérie", "e": "sweetheart"}, {"f": "gros", "e": "large"}, {"f": "plutôt", "e": "rather"}, {"f": "aura", "e": "will have"}, {"f": "filles", "e": "girls"}, {"f": "jouer", "e": "to play"}, {"f": "bureau", "e": "office"}];
+
+const STORE_KEY = "flashy-words-to-learn-v1";
+let toLearn = loadDeck();
+let currentCard = null;
+let flipTimer = null;
+
+function loadDeck() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY));
+    if (Array.isArray(saved) && saved.length) return saved;
+  } catch (e) {}
+  return WORDS.slice();
+}
+
+function saveDeck() {
+  localStorage.setItem(STORE_KEY, JSON.stringify(toLearn));
+}
+
+function updateCount() {
+  document.getElementById("left-count").textContent = `${toLearn.length} / ${WORDS.length}`;
+}
+
+function nextCard() {
+  clearTimeout(flipTimer);
+  if (!toLearn.length) {
+    document.getElementById("card-word").textContent = "Done! 🎉";
+    document.getElementById("card-lang").textContent = "";
+    document.getElementById("card-back-word").textContent = "You know all the words.";
+    document.getElementById("card").classList.remove("flipped");
+    updateCount();
+    return;
+  }
+  currentCard = toLearn[Math.floor(Math.random() * toLearn.length)];
+  document.getElementById("card-lang").textContent = "French";
+  document.getElementById("card-word").textContent = currentCard.f;
+  document.getElementById("card-back-word").textContent = currentCard.e;
+  document.getElementById("card").classList.remove("flipped");
+  flipTimer = setTimeout(() => {
+    document.getElementById("card").classList.add("flipped");
+  }, 3000);
+  updateCount();
+}
+
+document.getElementById("unknown-btn").addEventListener("click", nextCard);
+document.getElementById("known-btn").addEventListener("click", () => {
+  const i = toLearn.indexOf(currentCard);
+  if (i > -1) toLearn.splice(i, 1);
+  saveDeck();
+  nextCard();
+});
+document.getElementById("reset-deck").addEventListener("click", () => {
+  toLearn = WORDS.slice();
+  saveDeck();
+  nextCard();
+});
+document.getElementById("card").addEventListener("click", () => {
+  document.getElementById("card").classList.toggle("flipped");
+});
+
+nextCard();
+</script>
+</body>
+</html>

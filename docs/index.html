@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100 Days of Python — Run in Your Browser</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <h1>100 Days of Python — Run in Your Browser</h1>
+    <p>Every project from the 100 Days of Python course, runnable right here with no account and nothing to install. Console projects run on real Python (Pyodide), turtle graphics run via Skulpt, and the desktop GUI apps are rebuilt as web apps.</p>
+    <p style="margin-top:10px">Code: <a href="https://github.com/cheetah029/100-days-of-python">github.com/cheetah029/100-days-of-python</a></p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="toolbar">
+    <input type="search" id="search" placeholder="Search projects…" aria-label="Search projects">
+    <div class="filters" id="filters">
+      <button data-type="all" class="active">All</button>
+      <button data-type="console">Console</button>
+      <button data-type="turtle">Turtle graphics</button>
+      <button data-type="tkinter">Desktop apps (web)</button>
+    </div>
+  </div>
+  <p class="status" id="count"></p>
+  <div class="grid" id="grid"></div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    Built from <a href="https://github.com/cheetah029/100-days-of-python">cheetah029/100-days-of-python</a> · runs entirely in your browser
+  </div>
+</footer>
+
+<script>
+const TYPE_LABEL = { console: "Console", turtle: "Turtle", tkinter: "Web app" };
+let projects = [];
+let activeFilter = "all";
+
+async function load() {
+  const res = await fetch("data/manifest.json");
+  projects = await res.json();
+  // Sort: turtle + tkinter showcases first, then alphabetical.
+  const rank = { turtle: 0, tkinter: 1, console: 2 };
+  projects.sort((a, b) => (rank[a.type] - rank[b.type]) || a.title.localeCompare(b.title));
+  render();
+  document.getElementById("search").addEventListener("input", render);
+  document.getElementById("filters").addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-type]");
+    if (!btn) return;
+    activeFilter = btn.dataset.type;
+    document.querySelectorAll("#filters button").forEach(b => b.classList.toggle("active", b === btn));
+    render();
+  });
+}
+
+function targetFor(p) {
+  return p.type === "tkinter" ? `apps/${p.slug}/` : `run.html?slug=${encodeURIComponent(p.slug)}`;
+}
+
+function render() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const grid = document.getElementById("grid");
+  const list = projects.filter(p =>
+    (activeFilter === "all" || p.type === activeFilter) &&
+    (!q || p.title.toLowerCase().includes(q) || p.slug.toLowerCase().includes(q))
+  );
+  document.getElementById("count").textContent =
+    `Showing ${list.length} of ${projects.length} projects`;
+  grid.innerHTML = "";
+  for (const p of list) {
+    const card = document.createElement("div");
+    card.className = "card";
+    const action = p.type === "tkinter" ? "Open app" : "Run it";
+    card.innerHTML =
+      `<span class="badge ${p.type}">${TYPE_LABEL[p.type]}</span>` +
+      `<h3></h3>` +
+      `<div class="meta">${p.files.length} file${p.files.length === 1 ? "" : "s"}</div>` +
+      `<a class="run-btn" href="${targetFor(p)}">${action} →</a>`;
+    card.querySelector("h3").textContent = p.title;
+    grid.appendChild(card);
+  }
+  if (!list.length) {
+    grid.innerHTML = `<p class="status">No projects match. More are added as they are ported over.</p>`;
+  }
+}
+
+load().catch(err => {
+  document.getElementById("grid").innerHTML =
+    `<p class="status">Could not load the project list. (This page needs to be served over http(s), e.g. GitHub Pages — it won't work from file://.)</p>`;
+  console.error(err);
+});
+</script>
+</body>
+</html>

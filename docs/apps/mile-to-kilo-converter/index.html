@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mile to Kilometer Converter — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <h1>Mile to Kilometer Converter</h1>
+  <p class="status">Web version of the tkinter app. 1 mile = 1.609 km.</p>
+  <div class="panel">
+    <div class="app-form">
+      <label for="miles">Miles</label>
+      <div class="row">
+        <input type="number" id="miles" value="0" step="any" style="max-width:200px">
+        <button class="btn" id="calc">Calculate</button>
+      </div>
+      <div class="result-box" id="result">0 miles = 0 km</div>
+    </div>
+  </div>
+</div>
+<script>
+const MILES_TO_KM = 1.609;
+const milesInput = document.getElementById("miles");
+const result = document.getElementById("result");
+function convert() {
+  const miles = parseFloat(milesInput.value);
+  if (isNaN(miles)) { result.textContent = "Please enter a number."; return; }
+  const km = Math.round(miles * MILES_TO_KM * 1000) / 1000;
+  result.textContent = `${miles} miles = ${km} km`;
+}
+document.getElementById("calc").addEventListener("click", convert);
+milesInput.addEventListener("keydown", (e) => { if (e.key === "Enter") convert(); });
+convert();
+</script>
+</body>
+</html>

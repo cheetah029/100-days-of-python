@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Manager — 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="../../index.html">← Back to all projects</a>
+  <h1>🔒 Password Manager</h1>
+  <p class="status">Web version of the tkinter app. Same password generator, entries saved in this browser (localStorage) instead of data.json.</p>
+  <div class="panel" style="max-width:560px;margin:0 auto">
+    <div class="app-form">
+      <label for="website">Website:</label>
+      <div class="row">
+        <input type="text" id="website" style="flex:1" autocomplete="off">
+        <button class="btn secondary" id="search-btn">Search</button>
+      </div>
+      <label for="email">Email/Username:</label>
+      <input type="text" id="email" value="aaron@example.com" autocomplete="off">
+      <label for="password">Password:</label>
+      <div class="row">
+        <input type="text" id="password" style="flex:1" autocomplete="off">
+        <button class="btn secondary" id="generate-btn">Generate Password</button>
+      </div>
+      <button class="btn" id="add-btn">Add</button>
+      <div class="result-box" id="message" style="display:none"></div>
+    </div>
+  </div>
+  <div style="height:40px"></div>
+</div>
+<script>
+// Same generator as the original (main.py): 8-10 letters, 2-4 symbols, 2-4 numbers, shuffled.
+const LETTERS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const NUMBERS = "0123456789".split("");
+const SYMBOLS = ["!", "#", "$", "%", "&", "(", ")", "*", "+"];
+const STORE_KEY = "password-manager-data-v1";
+
+const websiteEl = document.getElementById("website");
+const emailEl = document.getElementById("email");
+const passwordEl = document.getElementById("password");
+const messageEl = document.getElementById("message");
+
+function showMessage(text) {
+  messageEl.style.display = "block";
+  messageEl.textContent = text;
+}
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+  catch (e) { return {}; }
+}
+function saveData(d) { localStorage.setItem(STORE_KEY, JSON.stringify(d)); }
+
+function randInt(a, b) { return a + Math.floor(Math.random() * (b - a + 1)); }
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+function generatePassword() {
+  const pwLetters = Array.from({ length: randInt(8, 10) }, () => pick(LETTERS));
+  const pwSymbols = Array.from({ length: randInt(2, 4) }, () => pick(SYMBOLS));
+  const pwNumbers = Array.from({ length: randInt(2, 4) }, () => pick(NUMBERS));
+  const list = pwLetters.concat(pwSymbols, pwNumbers);
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  const password = list.join("");
+  passwordEl.value = password;
+  navigator.clipboard.writeText(password).catch(() => {});
+  showMessage("Password generated and copied to clipboard.");
+}
+
+function save() {
+  const website = websiteEl.value.trim();
+  const email = emailEl.value.trim();
+  const password = passwordEl.value;
+  if (!website || !email || !password) {
+    showMessage("Oops — please make sure you haven't left any fields empty.");
+    return;
+  }
+  const data = loadData();
+  data[website] = { email, password };
+  saveData(data);
+  showMessage(`Success — added ${website} to the data store.`);
+  websiteEl.value = "";
+  passwordEl.value = "";
+  websiteEl.focus();
+}
+
+function findPassword() {
+  const website = websiteEl.value.trim();
+  const data = loadData();
+  if (!Object.keys(data).length) {
+    showMessage("Error — no data file found.");
+    return;
+  }
+  if (website in data) {
+    showMessage(`${website}\nEmail: ${data[website].email}\nPassword: ${data[website].password}`);
+  } else {
+    showMessage(`Error — no details for ${website} exist.`);
+  }
+}
+
+document.getElementById("generate-btn").addEventListener("click", generatePassword);
+document.getElementById("add-btn").addEventListener("click", save);
+document.getElementById("search-btn").addEventListener("click", findPassword);
+websiteEl.focus();
+</script>
+</body>
+</html>
