@@ -1,5 +1,216 @@
 [
   {
+    "slug": "blackjack-start",
+    "title": "Blackjack Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "blind-auction-start",
+    "title": "Blind Auction Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "caesar-cipher-4-start",
+    "title": "Caesar Cipher 4 Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "calculator-start",
+    "title": "Calculator Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "coffee-machine-start",
+    "title": "Coffee Machine Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-1-exercise",
+    "title": "Day 1-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-2-exercise",
+    "title": "Day 1-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-3-exercise",
+    "title": "Day 1-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-3-exercise-1",
+    "title": "Day 1-3 Exercise 1",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-4-exercise",
+    "title": "Day 1-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-printing-start",
+    "title": "Day 1 Printing Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-variables-start",
+    "title": "Day 1 Variables Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-10-1-exercise",
+    "title": "Day 10-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-10-end",
+    "title": "Day 10 End",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-10-start",
+    "title": "Day 10 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-12-start",
+    "title": "Day 12 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-13-1-exercise",
+    "title": "Day 13-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-18-3-start",
+    "title": "Day 18-3 Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-18-4-start",
+    "title": "Day 18-4 Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-18-5-start",
+    "title": "Day 18-5 Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-2-1-exercise",
+    "title": "Day 2-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-2-2-exercise",
+    "title": "Day 2-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
     "slug": "day-2-3-exercise",
     "title": "Day 2-3 Exercise",
     "type": "console",
@@ -10,18 +221,8 @@
     "entry": "main.py"
   },
   {
-    "slug": "flight-club",
-    "title": "Flight Club",
-    "type": "console",
-    "files": [
-      "VENV.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "exercise-tracking-end",
-    "title": "Exercise Tracking End",
+    "slug": "day-2-start",
+    "title": "Day 2 Start",
     "type": "console",
     "files": [
       "main.py"
@@ -29,121 +230,11 @@
     "entry": "main.py"
   },
   {
-    "slug": "quizzler-app-start",
-    "title": "Quizzler App Start",
-    "type": "tkinter",
-    "files": [
-      "data.py",
-      "main.py",
-      "question_model.py",
-      "quiz_brain.py",
-      "ui.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "kanye-quotes-start",
-    "title": "Kanye Quotes Start",
-    "type": "tkinter",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "flash-card-project-start",
-    "title": "Flash Card Project Start",
-    "type": "tkinter",
-    "files": [
-      "data/french_words.csv",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "password-manager-start",
-    "title": "Password Manager Start",
-    "type": "tkinter",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-30-2-exercise",
-    "title": "Day 30-2 Exercise",
+    "slug": "day-26-1-exercise",
+    "title": "Day 26-1 Exercise",
     "type": "console",
     "files": [
       "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-30-1-exercise",
-    "title": "Day 30-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "pomodoro-start",
-    "title": "Pomodoro Start",
-    "type": "tkinter",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "mile-to-kilo-converter",
-    "title": "Mile To Kilo Converter",
-    "type": "tkinter",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "tkinter-widget-demo",
-    "title": "Tkinter Widget Demo",
-    "type": "tkinter",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "NATO-alphabet-start",
-    "title": "Nato Alphabet Start",
-    "type": "console",
-    "files": [
-      "main.py",
-      "nato_phonetic_alphabet.csv"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-26-4-exercise",
-    "title": "Day 26-4 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-26-3-test-your-code",
-    "title": "Day 26-3 Test Your Code",
-    "type": "console",
-    "files": [
-      "README.md",
-      "file1.txt",
-      "file2.txt",
       "main.py"
     ],
     "entry": "main.py"
@@ -161,8 +252,20 @@
     "entry": "main.py"
   },
   {
-    "slug": "day-26-1-exercise",
-    "title": "Day 26-1 Exercise",
+    "slug": "day-26-3-test-your-code",
+    "title": "Day 26-3 Test Your Code",
+    "type": "console",
+    "files": [
+      "README.md",
+      "file1.txt",
+      "file2.txt",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-26-4-exercise",
+    "title": "Day 26-4 Exercise",
     "type": "console",
     "files": [
       "README.md",
@@ -171,15 +274,335 @@
     "entry": "main.py"
   },
   {
-    "slug": "us-states-game-start",
-    "title": "Us States Game Start",
-    "type": "turtle",
+    "slug": "day-3-1-exercise",
+    "title": "Day 3-1 Exercise",
+    "type": "console",
     "files": [
-      "50_states.csv",
-      "main.py",
-      "states_to_learn.csv"
+      "README.md",
+      "main.py"
     ],
     "entry": "main.py"
+  },
+  {
+    "slug": "day-3-2-exercise",
+    "title": "Day 3-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-3-exercise",
+    "title": "Day 3-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-4-exercise",
+    "title": "Day 3-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-5-test-your-code",
+    "title": "Day 3-5 Test Your Code",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-end-1",
+    "title": "Day 3 End 1",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-multiple-if",
+    "title": "Day 3 Multiple If",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-start",
+    "title": "Day 3 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-30-1-exercise",
+    "title": "Day 30-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-30-2-exercise",
+    "title": "Day 30-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-1-exercise",
+    "title": "Day 4-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-2-exercise",
+    "title": "Day 4-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-3-exercise",
+    "title": "Day 4-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-list-practice",
+    "title": "Day 4 List Practice",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-start",
+    "title": "Day 4 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-1-exercise",
+    "title": "Day 5-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-2-exercise",
+    "title": "Day 5-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-3-exercise",
+    "title": "Day 5-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-4-exercise",
+    "title": "Day 5-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-start",
+    "title": "Day 5 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-6-start",
+    "title": "Day 6 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "Day-7-Hangman-5-Start",
+    "title": "Day 7 Hangman 5 Start",
+    "type": "console",
+    "files": [
+      "hangman_art.py",
+      "hangman_words.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-8-1-exercise",
+    "title": "Day 8-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-8-2-exercise",
+    "title": "Day 8-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-8-start",
+    "title": "Day 8 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-9-start",
+    "title": "Day 9 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "etch-a-sketch-start",
+    "title": "Etch A Sketch Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "exercise-tracking-end",
+    "title": "Exercise Tracking End",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "flash-card-project-start",
+    "title": "Flash Card Project Start",
+    "type": "tkinter",
+    "files": [
+      "data/french_words.csv",
+      "main.py"
+    ],
+    "entry": "main.py",
+    "app": true
+  },
+  {
+    "slug": "flight-club",
+    "title": "Flight Club",
+    "type": "console",
+    "files": [
+      "VENV.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "guess-the-number-start",
+    "title": "Guess The Number Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "higher-lower-start",
+    "title": "Higher Lower Start",
+    "type": "console",
+    "files": [
+      "art.py",
+      "game_data.py",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "hirst_painting-start",
+    "title": "Hirst Painting Start",
+    "type": "turtle",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "kanye-quotes-start",
+    "title": "Kanye Quotes Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py",
+    "app": true
   },
   {
     "slug": "mail-merge-project-start",
@@ -202,16 +625,65 @@
     "entry": "main.py"
   },
   {
-    "slug": "turtle-crossing-start",
-    "title": "Turtle Crossing Start",
-    "type": "turtle",
+    "slug": "mile-to-kilo-converter",
+    "title": "Mile To Kilo Converter",
+    "type": "tkinter",
     "files": [
-      "car_manager.py",
+      "main.py"
+    ],
+    "entry": "main.py",
+    "app": true
+  },
+  {
+    "slug": "NATO-alphabet-start",
+    "title": "NATO Alphabet Start",
+    "type": "console",
+    "files": [
       "main.py",
-      "player.py",
-      "scoreboard.py"
+      "nato_phonetic_alphabet.csv"
     ],
     "entry": "main.py"
+  },
+  {
+    "slug": "oop-coffee-machine-start",
+    "title": "Oop Coffee Machine Start",
+    "type": "console",
+    "files": [
+      "coffee_maker.py",
+      "main.py",
+      "menu.py",
+      "money_machine.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "password-generator-start",
+    "title": "Password Generator Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "password-manager-start",
+    "title": "Password Manager Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py",
+    "app": true
+  },
+  {
+    "slug": "pomodoro-start",
+    "title": "Pomodoro Start",
+    "type": "tkinter",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py",
+    "app": true
   },
   {
     "slug": "pong-game",
@@ -222,6 +694,41 @@
       "main.py",
       "paddle.py",
       "scoreboard.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "quiz-game-start",
+    "title": "Quiz Game Start",
+    "type": "console",
+    "files": [
+      "data.py",
+      "main.py",
+      "question_model.py",
+      "quiz_brain.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "quizzler-app-start",
+    "title": "Quizzler App Start",
+    "type": "tkinter",
+    "files": [
+      "data.py",
+      "main.py",
+      "question_model.py",
+      "quiz_brain.py",
+      "ui.py"
+    ],
+    "entry": "main.py",
+    "app": true
+  },
+  {
+    "slug": "rock-paper-scissors-start",
+    "title": "Rock Paper Scissors Start",
+    "type": "console",
+    "files": [
+      "main.py"
     ],
     "entry": "main.py"
   },
@@ -239,36 +746,8 @@
     "entry": "main.py"
   },
   {
-    "slug": "turtle-race-start",
-    "title": "Turtle Race Start",
-    "type": "turtle",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "etch-a-sketch-start",
-    "title": "Etch A Sketch Start",
-    "type": "turtle",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "hirst_painting-start",
-    "title": "Hirst Painting Start",
-    "type": "turtle",
-    "files": [
-      "hirstpainting-start/main.py",
-      "hirstpainting-start/nohup.out"
-    ],
-    "entry": "hirstpainting-start/main.py"
-  },
-  {
-    "slug": "day-18-5-start",
-    "title": "Day 18-5 Start",
+    "slug": "tip-calculator-start",
+    "title": "Tip Calculator Start",
     "type": "console",
     "files": [
       "main.py"
@@ -276,346 +755,14 @@
     "entry": "main.py"
   },
   {
-    "slug": "day-18-4-start",
-    "title": "Day 18-4 Start",
-    "type": "console",
+    "slug": "tkinter-widget-demo",
+    "title": "Tkinter Widget Demo",
+    "type": "tkinter",
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-18-3-start",
-    "title": "Day 18-3 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "quiz-game-start",
-    "title": "Quiz Game Start",
-    "type": "console",
-    "files": [
-      "data.py",
-      "main.py",
-      "question_model.py",
-      "quiz_brain.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "oop-coffee-machine-start",
-    "title": "Oop Coffee Machine Start",
-    "type": "console",
-    "files": [
-      "coffee_maker.py",
-      "main.py",
-      "menu.py",
-      "money_machine.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "coffee-machine-start",
-    "title": "Coffee Machine Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "higher-lower-start",
-    "title": "Higher Lower Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "game_data.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-13-1-exercise",
-    "title": "Day 13-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "guess-the-number-start",
-    "title": "Guess The Number Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-12-start",
-    "title": "Day 12 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "blackjack-start",
-    "title": "Blackjack Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "calculator-start",
-    "title": "Calculator Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-10-end",
-    "title": "Day 10 End",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-10-1-exercise",
-    "title": "Day 10-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-10-start",
-    "title": "Day 10 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "blind-auction-start",
-    "title": "Blind Auction Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-9-start",
-    "title": "Day 9 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "caesar-cipher-4-start",
-    "title": "Caesar Cipher 4 Start",
-    "type": "console",
-    "files": [
-      "art.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-8-2-exercise",
-    "title": "Day 8-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-8-1-exercise",
-    "title": "Day 8-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-8-start",
-    "title": "Day 8 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "Day-7-Hangman-5-Start",
-    "title": "Day 7 Hangman 5 Start",
-    "type": "console",
-    "files": [
-      "hangman_art.py",
-      "hangman_words.py",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-6-start",
-    "title": "Day 6 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "password-generator-start",
-    "title": "Password Generator Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-5-4-exercise",
-    "title": "Day 5-4 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-5-3-exercise",
-    "title": "Day 5-3 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-5-2-exercise",
-    "title": "Day 5-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-5-test-your-code",
-    "title": "Day 3-5 Test Your Code",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-5-1-exercise",
-    "title": "Day 5-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-5-start",
-    "title": "Day 5 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "rock-paper-scissors-start",
-    "title": "Rock Paper Scissors Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-4-3-exercise",
-    "title": "Day 4-3 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-4-2-exercise",
-    "title": "Day 4-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-4-list-practice",
-    "title": "Day 4 List Practice",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-4-1-exercise",
-    "title": "Day 4-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-4-start",
-    "title": "Day 4 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "app": true
   },
   {
     "slug": "treasure-island-start",
@@ -627,175 +774,34 @@
     "entry": "main.py"
   },
   {
-    "slug": "day-3-end-1",
-    "title": "Day 3 End 1",
-    "type": "console",
+    "slug": "turtle-crossing-start",
+    "title": "Turtle Crossing Start",
+    "type": "turtle",
+    "files": [
+      "car_manager.py",
+      "main.py",
+      "player.py",
+      "scoreboard.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "turtle-race-start",
+    "title": "Turtle Race Start",
+    "type": "turtle",
     "files": [
       "main.py"
     ],
     "entry": "main.py"
   },
   {
-    "slug": "day-3-4-exercise",
-    "title": "Day 3-4 Exercise",
-    "type": "console",
+    "slug": "us-states-game-start",
+    "title": "Us States Game Start",
+    "type": "turtle",
     "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-multiple-if",
-    "title": "Day 3 Multiple If",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-3-exercise",
-    "title": "Day 3-3 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-2-exercise",
-    "title": "Day 3-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-1-exercise",
-    "title": "Day 3-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-3-start",
-    "title": "Day 3 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "tip-calculator-start",
-    "title": "Tip Calculator Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-2-2-exercise",
-    "title": "Day 2-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-2-1-exercise",
-    "title": "Day 2-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-2-start",
-    "title": "Day 2 Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-4-exercise",
-    "title": "Day 1-4 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-variables-start",
-    "title": "Day 1 Variables Start",
-    "type": "console",
-    "files": [
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-3-exercise-1",
-    "title": "Day 1-3 Exercise 1",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-3-exercise",
-    "title": "Day 1-3 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-2-exercise",
-    "title": "Day 1-2 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-1-exercise",
-    "title": "Day 1-1 Exercise",
-    "type": "console",
-    "files": [
-      "README.md",
-      "main.py"
-    ],
-    "entry": "main.py"
-  },
-  {
-    "slug": "day-1-printing-start",
-    "title": "Day 1 Printing Start",
-    "type": "console",
-    "files": [
-      "main.py"
+      "50_states.csv",
+      "main.py",
+      "states_to_learn.csv"
     ],
     "entry": "main.py"
   }
