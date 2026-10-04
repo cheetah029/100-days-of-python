@@ -5,6 +5,7 @@ replit.nix
 __pycache__/
 *.pyc
 .venv/
+venv*/
 .cache/
 .local/
 .upm/
