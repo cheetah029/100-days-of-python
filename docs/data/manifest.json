@@ -296,6 +296,63 @@
     "entry": "coffee-machine-start/main.py"
   },
   {
+    "slug": "day-13-1-exercise",
+    "title": "Day 13-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-12-start",
+    "title": "Day 12 Start",
+    "type": "console",
+    "files": [
+      "day-12-start/main.py"
+    ],
+    "entry": "day-12-start/main.py"
+  },
+  {
+    "slug": "calculator-start",
+    "title": "Calculator Start",
+    "type": "console",
+    "files": [
+      "calculator-start/art.py",
+      "calculator-start/main.py"
+    ],
+    "entry": "calculator-start/art.py"
+  },
+  {
+    "slug": "day-10-end",
+    "title": "Day 10 End",
+    "type": "console",
+    "files": [
+      "day-10-end/main.py"
+    ],
+    "entry": "day-10-end/main.py"
+  },
+  {
+    "slug": "day-10-1-exercise",
+    "title": "Day 10-1 Exercise",
+    "type": "console",
+    "files": [
+      "day-10-1-exercise/README.md",
+      "day-10-1-exercise/main.py"
+    ],
+    "entry": "day-10-1-exercise/main.py"
+  },
+  {
+    "slug": "day-10-start",
+    "title": "Day 10 Start",
+    "type": "console",
+    "files": [
+      "day-10-start/main.py"
+    ],
+    "entry": "day-10-start/main.py"
+  },
+  {
     "slug": "day-9-start",
     "title": "Day 9 Start",
     "type": "console",
