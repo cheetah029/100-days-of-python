@@ -145,7 +145,17 @@ if not getattr(_t, "_compat_applied", False):
         def bgcolor(self, *args):
             if not args:
                 return self._real.bgcolor()
+            self._cp_bg = args
             return self._real.bgcolor(*_conv(args))
+
+        def setup(self, *args, **kwargs):
+            # Skulpt resizes its canvases here, which wipes a background set
+            # earlier with bgcolor(); CPython's turtle keeps it, so repaint.
+            result = self._real.setup(*args, **kwargs)
+            bg = getattr(self, "_cp_bg", None)
+            if bg is not None:
+                self._real.bgcolor(*_conv(bg))
+            return result
 
         def onkeypress(self, fun, key=None):
             if key is None:
@@ -171,6 +181,9 @@ if not getattr(_t, "_compat_applied", False):
     def bgcolor(*args):
         return Screen().bgcolor(*args)
 
+    def setup(*args, **kwargs):
+        return Screen().setup(*args, **kwargs)
+
     def textinput(title, prompt):
         return Screen().textinput(title, prompt)
 
@@ -187,6 +200,7 @@ if not getattr(_t, "_compat_applied", False):
     _t.Screen = Screen
     _t.colormode = colormode
     _t.bgcolor = bgcolor
+    _t.setup = setup
     _t.textinput = textinput
     _t.numinput = numinput
     _t.onkeypress = onkeypress
