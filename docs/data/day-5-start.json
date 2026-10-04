@@ -1,0 +1,1 @@
+{"slug": "day-5-start", "files": {"main.py": "#For Loop with Lists\n# fruits = [\"Apple\", \"Peach\", \"Pear\"]\n# for fruit in fruits:\n#   print(fruit)\n#   print(fruit + \" Pie\")\n\n#For Loop with Range\n# for number in range(1, 11, 3):\n#   print(number)\n\ntotal = 0\nfor number in range(1, 101):\n  total += number\nprint(total)"}}

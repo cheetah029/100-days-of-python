@@ -80,6 +80,16 @@
     "entry": "main.py"
   },
   {
+    "slug": "day-30-1-exercise",
+    "title": "Day 30-1 Exercise",
+    "type": "console",
+    "files": [
+      "day-30-1-exercise/README.md",
+      "day-30-1-exercise/main.py"
+    ],
+    "entry": "day-30-1-exercise/main.py"
+  },
+  {
     "slug": "pomodoro-start",
     "title": "Pomodoro Start",
     "type": "tkinter",
@@ -370,6 +380,113 @@
       "main.py"
     ],
     "entry": "main.py"
+  },
+  {
+    "slug": "day-8-1-exercise",
+    "title": "Day 8-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-6-start",
+    "title": "Day 6 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-4-exercise",
+    "title": "Day 5-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-3-exercise",
+    "title": "Day 5-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-2-exercise",
+    "title": "Day 5-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-5-test-your-code",
+    "title": "Day 3-5 Test Your Code",
+    "type": "console",
+    "files": [
+      "day-3-5-test-your-code/README.md",
+      "day-3-5-test-your-code/main.py"
+    ],
+    "entry": "day-3-5-test-your-code/main.py"
+  },
+  {
+    "slug": "day-5-1-exercise",
+    "title": "Day 5-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-5-start",
+    "title": "Day 5 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-3-exercise",
+    "title": "Day 4-3 Exercise",
+    "type": "console",
+    "files": [
+      "day-4-3-exercise/README.md",
+      "day-4-3-exercise/main.py"
+    ],
+    "entry": "day-4-3-exercise/main.py"
+  },
+  {
+    "slug": "day-4-2-exercise",
+    "title": "Day 4-2 Exercise",
+    "type": "console",
+    "files": [
+      "day-4-2-exercise/README.md",
+      "day-4-2-exercise/main.py"
+    ],
+    "entry": "day-4-2-exercise/main.py"
+  },
+  {
+    "slug": "day-4-list-practice",
+    "title": "Day 4 List Practice",
+    "type": "console",
+    "files": [
+      "day-4-list-practice/main.py"
+    ],
+    "entry": "day-4-list-practice/main.py"
   },
   {
     "slug": "day-4-1-exercise",

@@ -1,0 +1,1 @@
+{"slug": "day-6-start", "files": {"main.py": "def my_function():\n  print(\"Hello\")\n  print(\"Bye\")\n\nmy_function()"}}
