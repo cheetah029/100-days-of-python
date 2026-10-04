@@ -83,7 +83,8 @@ if not getattr(_t, "_compat_applied", False):
                 return
             name = "_sz_%s_%s_%s" % (base, wid, length)
             if name not in _OrigScreen().getshapes():
-                _t.register_shape(name, [[x * length, y * wid] for x, y in _BASE_SHAPES[base]])
+                # shapes point along +y (heading), so length scales y and width scales x
+                _t.register_shape(name, [[x * wid, y * length] for x, y in _BASE_SHAPES[base]])
             _OrigTurtle.shape(self, name)
 
         def shapesize(self, stretch_wid=None, stretch_len=None, outline=None):
