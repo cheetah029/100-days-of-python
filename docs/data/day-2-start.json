@@ -1,0 +1,1 @@
+{"slug": "day-2-start", "files": {"main.py": "# num_char = len(input(\"What is your name?\"))\n# new_num_char = str(num_char)\n# print(\"Your name has \" + new_num_char + \" characters.\")\n\na = float(123)\nprint(type(a))\n\n# print(70 + float(\"100.5\"))\nprint(str(70) + str(100))"}}

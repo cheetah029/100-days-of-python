@@ -313,5 +313,206 @@
       "main.py"
     ],
     "entry": "main.py"
+  },
+  {
+    "slug": "day-4-1-exercise",
+    "title": "Day 4-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-4-start",
+    "title": "Day 4 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "treasure-island-start",
+    "title": "Treasure Island Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-end-1",
+    "title": "Day 3 End 1",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-4-exercise",
+    "title": "Day 3-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-multiple-if",
+    "title": "Day 3 Multiple If",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-3-exercise",
+    "title": "Day 3-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-2-exercise",
+    "title": "Day 3-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-1-exercise",
+    "title": "Day 3-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-3-start",
+    "title": "Day 3 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "tip-calculator-start",
+    "title": "Tip Calculator Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-2-2-exercise",
+    "title": "Day 2-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-2-1-exercise",
+    "title": "Day 2-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-2-start",
+    "title": "Day 2 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-4-exercise",
+    "title": "Day 1-4 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-variables-start",
+    "title": "Day 1 Variables Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-3-exercise-1",
+    "title": "Day 1-3 Exercise 1",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-3-exercise",
+    "title": "Day 1-3 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-2-exercise",
+    "title": "Day 1-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-1-exercise",
+    "title": "Day 1-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
+    "slug": "day-1-printing-start",
+    "title": "Day 1 Printing Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
   }
 ]
