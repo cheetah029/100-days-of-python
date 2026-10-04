@@ -464,6 +464,15 @@
     "entry": "main.py"
   },
   {
+    "slug": "day-8-start",
+    "title": "Day 8 Start",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py"
+  },
+  {
     "slug": "Day-7-Hangman-5-Start",
     "title": "Day 7 Hangman 5 Start",
     "type": "console",
