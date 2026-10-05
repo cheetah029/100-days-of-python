@@ -95,7 +95,8 @@ async function init() {
   srcLink.href = `https://github.com/cheetah029/100-days-of-python/blob/main/projects/${srcPath}`;
   srcLink.target = "_blank";
   srcLink.rel = "noopener";
-  srcLink.textContent = "source code on GitHub";
+  srcLink.textContent = `View Code on GitHub: ${srcLink.href}`;
+  srcLink.style.overflowWrap = "anywhere";
   subtitle.appendChild(srcLink);
   document.getElementById("engine-note").textContent =
     meta.type === "turtle" ? "(Skulpt + turtle canvas)" : "(Pyodide — real Python)";
