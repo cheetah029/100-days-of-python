@@ -242,6 +242,10 @@ def main() -> int:
             item["app"] = os.path.isfile(os.path.join(APPS_DIR, slug, "index.html"))
             if not item["app"]:
                 print(f"  [{slug}] tkinter project has no docs/apps/{slug}/index.html yet")
+        elif os.path.isfile(os.path.join(APPS_DIR, slug, "index.html")):
+            # Non-tkinter projects (e.g. us-states-game-start) can also ship a
+            # hand-written web version; run.html redirects to it via meta.app.
+            item["app"] = True
         elif not entry:
             print(f"  [{slug}] warning: no .py file to run")
         manifest.append(item)

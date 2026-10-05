@@ -59,7 +59,7 @@ async function load() {
 }
 
 function targetFor(p) {
-  return p.type === "tkinter" ? `apps/${encodeURIComponent(p.slug)}/` : `run.html?slug=${encodeURIComponent(p.slug)}`;
+  return (p.app || p.type === "tkinter") ? `apps/${encodeURIComponent(p.slug)}/` : `run.html?slug=${encodeURIComponent(p.slug)}`;
 }
 
 function render() {

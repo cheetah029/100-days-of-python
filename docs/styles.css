@@ -302,3 +302,4 @@ footer.site a { color: var(--accent); }
   .timer-display { font-size: 3rem; }
   .flashcard-face .word { font-size: 1.6rem; }
 }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 8px 0; text-align: center; }

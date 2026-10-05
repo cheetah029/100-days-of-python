@@ -29,7 +29,7 @@ const result = document.getElementById("result");
 function convert() {
   const miles = parseFloat(milesInput.value);
   if (isNaN(miles)) { result.textContent = "Please enter a number."; return; }
-  const km = Math.round(miles * MILES_TO_KM * 1000) / 1000;
+  const km = Math.round(miles * MILES_TO_KM);
   result.textContent = `${miles} miles = ${km} km`;
 }
 document.getElementById("calc").addEventListener("click", convert);

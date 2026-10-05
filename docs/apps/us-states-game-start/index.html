@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>U.S. States Game: 100 Days of Python</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  .states-title { text-align: center; font-size: 1.6rem; margin: 6px 0; }
+  .map-wrap { position: relative; width: 725px; max-width: 100%; margin: 0 auto; }
+  .map-wrap img { display: block; width: 100%; height: auto; }
+  .state-label { position: absolute; transform: translate(-50%, -50%); font-size: 11px;
+                 font-family: Arial, sans-serif; color: #000; pointer-events: none;
+                 text-shadow: 0 0 2px #fff, 0 0 2px #fff; white-space: nowrap; }
+  .guess-row { display: flex; gap: 8px; justify-content: center; margin: 14px 0; flex-wrap: wrap; }
+  .guess-row input { font-size: 1rem; padding: 8px 10px; }
+  #missing-list { columns: 3; max-width: 560px; margin: 12px auto; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back-link" href="https://aarongu.com/">← Back to all projects</a>
+  <div class="panel" style="max-width:780px;margin:0 auto">
+    <div class="states-title" id="title-label">U.S. States Game</div>
+    <div class="map-wrap" id="map-wrap">
+      <img src="blank_states_img.gif" alt="Blank U.S. map" id="map-img">
+    </div>
+    <div class="guess-row" id="guess-row">
+      <input id="guess-input" type="text" placeholder="What's another state's name?" autocomplete="off">
+      <button class="btn" id="guess-btn">Guess</button>
+      <button class="btn secondary" id="exit-btn">Exit</button>
+    </div>
+    <p class="status" id="status" style="text-align:center"></p>
+    <div id="end-panel" style="display:none;text-align:center">
+      <p id="missing-title"></p>
+      <div id="missing-list"></div>
+      <button class="btn" id="download-btn">Download states_to_learn.csv</button>
+      <button class="btn secondary" id="restart-btn">Play again</button>
+    </div>
+    <p class="hint" style="text-align:center">A web version of the turtle original — same rules: name all 50 states, type "Exit" to finish early.</p>
+  </div>
+</div>
+<script src="states.js"></script>
+<script>
+// Faithful port of us-states-game-start/main.py.
+// Turtle coords (center origin, y up) map to CSS px on the 725x491 image:
+//   left = 362.5 + x,  top = 245.5 - y
+const MAP_W = 725, MAP_H = 491;
+const guessed = new Set();
+const mapWrap = document.getElementById("map-wrap");
+const titleLabel = document.getElementById("title-label");
+const guessInput = document.getElementById("guess-input");
+const statusEl = document.getElementById("status");
+
+function updateTitle() {
+  titleLabel.textContent = `${guessed.size}/50 States Correct`;
+}
+
+function placeLabel(state) {
+  const el = document.createElement("span");
+  el.className = "state-label";
+  el.textContent = state.state;
+  el.style.left = (MAP_W / 2 + state.x) / MAP_W * 100 + "%";
+  el.style.top = (MAP_H / 2 - state.y) / MAP_H * 100 + "%";
+  mapWrap.appendChild(el);
+}
+
+function guess() {
+  const raw = guessInput.value.trim();
+  guessInput.value = "";
+  if (!raw) return;
+  const answer = raw.charAt(0).toUpperCase() + raw.slice(1).toLowerCase();
+  if (answer === "Exit") { endGame(); return; }
+  const match = STATES.find(s => s.state === answer);
+  if (match && !guessed.has(match.state)) {
+    guessed.add(match.state);
+    placeLabel(match);
+    updateTitle();
+    statusEl.textContent = "";
+    if (guessed.size === 50) endGame(true);
+  } else if (match) {
+    statusEl.textContent = "You already guessed that one.";
+  } else {
+    statusEl.textContent = `"${raw}" isn't a U.S. state — try again.`;
+  }
+  guessInput.focus();
+}
+
+function endGame(won = false) {
+  document.getElementById("guess-row").style.display = "none";
+  document.getElementById("end-panel").style.display = "block";
+  const missing = STATES.filter(s => !guessed.has(s.state)).map(s => s.state);
+  titleLabel.textContent = won ? "50/50 — you named them all!" : `${guessed.size}/50 States Correct`;
+  document.getElementById("missing-title").textContent =
+    won ? "Amazing — no states left to learn!" : `${missing.length} states to learn:`;
+  document.getElementById("missing-list").innerHTML =
+    missing.map(s => `<div>${s}</div>`).join("");
+  document.getElementById("download-btn").onclick = () => {
+    // Same as the original's pandas to_csv("states_to_learn.csv").
+    const csv = "state\n" + missing.join("\n") + "\n";
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    a.download = "states_to_learn.csv";
+    a.click();
+    URL.revokeObjectURL(a.href);
+  };
+  statusEl.textContent = "";
+}
+
+document.getElementById("guess-btn").onclick = guess;
+document.getElementById("exit-btn").onclick = () => endGame();
+document.getElementById("restart-btn").onclick = () => location.reload();
+guessInput.addEventListener("keydown", e => { if (e.key === "Enter") guess(); });
+updateTitle();
+guessInput.focus();
+</script>
+</body>
+</html>

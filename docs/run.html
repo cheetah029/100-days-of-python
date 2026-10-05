@@ -119,11 +119,14 @@ async function init() {
   const manifest = await mres.json();
   meta = manifest.find(p => p.slug === slug);
   if (!meta) throw new Error("Unknown project: " + slug);
-  if (meta.type === "tkinter") {
-    // Desktop (tkinter) projects run as hand-written web apps, not here.
-    if (meta.app === false) throw new Error(`"${meta.title}" is a desktop app and its web version hasn't been built yet`);
+  if (meta.app) {
+    // Projects with a hand-written web version (tkinter apps, us-states-game)
+    // run there instead of in the Python runners.
     location.replace(`apps/${encodeURIComponent(slug)}/`);
     return;
+  }
+  if (meta.type === "tkinter") {
+    throw new Error(`"${meta.title}" is a desktop app and its web version hasn't been built yet`);
   }
   const dres = await fetch(`data/${encodeURIComponent(slug)}.json`);
   if (!dres.ok) throw new Error(`Could not load files for "${slug}" (HTTP ${dres.status})`);
@@ -196,6 +199,10 @@ async function init() {
 
   if (meta.type === "turtle") {
     document.getElementById("turtle-stage").style.display = "block";
+    const hint = document.createElement("p");
+    hint.className = "hint";
+    hint.textContent = "Tip: click the canvas once so it has keyboard focus, then use the arrow keys / on-screen controls.";
+    document.getElementById("turtle-stage").appendChild(hint);
   }
 
   document.getElementById("loading").style.display = "none";
@@ -259,6 +266,37 @@ def _prepare_run():
     os.chdir(PROJECT_DIR)
     if PROJECT_DIR not in sys.path:
         sys.path.insert(0, PROJECT_DIR)
+
+# Demo shims for projects that need API keys / network access.
+# exercise-tracking-end reads Nutritionix/Sheety credentials from the environment
+# and flight-club POSTs signups to a Sheety endpoint; neither can work in the
+# browser (no secrets here, no sockets in Pyodide), so both run in demo mode:
+# harmless placeholder credentials plus a fake `requests` that never sends.
+_RUN_SLUG = globals().get("__run_slug", "")
+if _RUN_SLUG in ("exercise-tracking-end", "flight-club"):
+    os.environ.setdefault("NT_APP_ID", "demo-app-id")
+    os.environ.setdefault("NT_API_KEY", "demo-api-key")
+    os.environ.setdefault("SHEET_API_ENDPOINT", "https://example.invalid/demo-sheet")
+    os.environ.setdefault("TOKEN", "demo-token")
+
+    class _DemoResponse:
+        status_code = 200
+        text = '{"ok": true}  (demo mode — nothing was actually sent)'
+        def json(self):
+            return {"exercises": [
+                {"name": "running", "duration_min": 30, "nf_calories": 300},
+                {"name": "cycling", "duration_min": 45, "nf_calories": 400},
+            ]}
+
+    def _demo_post(url, json=None, headers=None, **kwargs):
+        print(f"[demo mode] POST {url} — not actually sent.")
+        return _DemoResponse()
+
+    _requests_stub = types.ModuleType("requests")
+    _requests_stub.post = _demo_post
+    _requests_stub.get = _demo_post
+    sys.modules["requests"] = _requests_stub
+    print(f"[demo mode] {_RUN_SLUG}: API calls are simulated; nothing leaves your browser.")
 `;
 
 async function ensurePyodide() {
@@ -274,6 +312,7 @@ async function ensurePyodide() {
     pyodide.setStdout({ write: (buf) => { termPrint(dec.decode(buf, { stream: true })); return buf.length; } });
     pyodide.setStderr({ write: (buf) => { termPrint(dec.decode(buf, { stream: true }), "err"); return buf.length; } });
     window.clearTerminal = clearTerminal;
+    pyodide.globals.set("__run_slug", slug);
     await pyodide.runPythonAsync(BOOTSTRAP_PY);
   } catch (e) {
     pyodide = null;
