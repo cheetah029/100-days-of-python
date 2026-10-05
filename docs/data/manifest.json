@@ -7,7 +7,8 @@
       "art.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "blackjack-start/main.py"
   },
   {
     "slug": "blind-auction-start",
@@ -17,7 +18,8 @@
       "art.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "blind-auction-start/main.py"
   },
   {
     "slug": "caesar-cipher-4-start",
@@ -27,7 +29,8 @@
       "art.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "caesar-cipher-4-start/main.py"
   },
   {
     "slug": "calculator-start",
@@ -37,7 +40,8 @@
       "art.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "calculator-start/main.py"
   },
   {
     "slug": "coffee-machine-start",
@@ -46,7 +50,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "coffee-machine-start/main.py"
   },
   {
     "slug": "day-1-1-exercise",
@@ -56,7 +61,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-1-exercise/main.py"
   },
   {
     "slug": "day-1-2-exercise",
@@ -66,7 +72,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-2-exercise/main.py"
   },
   {
     "slug": "day-1-3-exercise",
@@ -76,7 +83,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-3-exercise/main.py"
   },
   {
     "slug": "day-1-3-exercise-1",
@@ -86,7 +94,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-3-exercise-1/main.py"
   },
   {
     "slug": "day-1-4-exercise",
@@ -96,7 +105,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-4-exercise/main.py"
   },
   {
     "slug": "day-1-printing-start",
@@ -105,7 +115,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-printing-start/main.py"
   },
   {
     "slug": "day-1-variables-start",
@@ -114,7 +125,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-1-variables-start/main.py"
   },
   {
     "slug": "day-10-1-exercise",
@@ -124,7 +136,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-10-1-exercise/main.py"
   },
   {
     "slug": "day-10-end",
@@ -133,7 +146,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-10-end/main.py"
   },
   {
     "slug": "day-10-start",
@@ -142,7 +156,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-10-start/main.py"
   },
   {
     "slug": "day-12-start",
@@ -151,7 +166,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-12-start/main.py"
   },
   {
     "slug": "day-13-1-exercise",
@@ -161,7 +177,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-13-1-exercise/main.py"
   },
   {
     "slug": "day-18-3-start",
@@ -170,7 +187,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-18-3-start/main.py"
   },
   {
     "slug": "day-18-4-start",
@@ -179,7 +197,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-18-4-start/main.py"
   },
   {
     "slug": "day-18-5-start",
@@ -188,7 +207,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-18-5-start/main.py"
   },
   {
     "slug": "day-2-1-exercise",
@@ -198,7 +218,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-2-1-exercise/main.py"
   },
   {
     "slug": "day-2-2-exercise",
@@ -208,7 +229,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-2-2-exercise/main.py"
   },
   {
     "slug": "day-2-3-exercise",
@@ -218,7 +240,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-2-3-exercise/main.py"
   },
   {
     "slug": "day-2-start",
@@ -227,7 +250,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-2-start/main.py"
   },
   {
     "slug": "day-26-1-exercise",
@@ -237,7 +261,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-26-1-exercise/main.py"
   },
   {
     "slug": "day-26-3-exercise",
@@ -249,7 +274,8 @@
       "file2.txt",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-26-3-exercise/main.py"
   },
   {
     "slug": "day-26-3-test-your-code",
@@ -261,7 +287,8 @@
       "file2.txt",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-26-3-test-your-code/main.py"
   },
   {
     "slug": "day-26-4-exercise",
@@ -271,7 +298,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-26-4-exercise/main.py"
   },
   {
     "slug": "day-3-1-exercise",
@@ -281,7 +309,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-1-exercise/main.py"
   },
   {
     "slug": "day-3-2-exercise",
@@ -291,7 +320,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-2-exercise/main.py"
   },
   {
     "slug": "day-3-3-exercise",
@@ -301,7 +331,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-3-exercise/main.py"
   },
   {
     "slug": "day-3-4-exercise",
@@ -311,7 +342,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-4-exercise/main.py"
   },
   {
     "slug": "day-3-5-test-your-code",
@@ -321,7 +353,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-5-test-your-code/main.py"
   },
   {
     "slug": "day-3-end-1",
@@ -330,7 +363,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-end-1/main.py"
   },
   {
     "slug": "day-3-multiple-if",
@@ -339,7 +373,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-multiple-if/main.py"
   },
   {
     "slug": "day-3-start",
@@ -348,7 +383,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-3-start/main.py"
   },
   {
     "slug": "day-30-1-exercise",
@@ -358,7 +394,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-30-1-exercise/main.py"
   },
   {
     "slug": "day-30-2-exercise",
@@ -368,7 +405,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-30-2-exercise/main.py"
   },
   {
     "slug": "day-4-1-exercise",
@@ -378,7 +416,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-4-1-exercise/main.py"
   },
   {
     "slug": "day-4-2-exercise",
@@ -388,7 +427,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-4-2-exercise/main.py"
   },
   {
     "slug": "day-4-3-exercise",
@@ -398,7 +438,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-4-3-exercise/main.py"
   },
   {
     "slug": "day-4-list-practice",
@@ -407,7 +448,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-4-list-practice/main.py"
   },
   {
     "slug": "day-4-start",
@@ -416,7 +458,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-4-start/main.py"
   },
   {
     "slug": "day-5-1-exercise",
@@ -426,7 +469,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-5-1-exercise/main.py"
   },
   {
     "slug": "day-5-2-exercise",
@@ -436,7 +480,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-5-2-exercise/main.py"
   },
   {
     "slug": "day-5-3-exercise",
@@ -446,7 +491,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-5-3-exercise/main.py"
   },
   {
     "slug": "day-5-4-exercise",
@@ -456,7 +502,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-5-4-exercise/main.py"
   },
   {
     "slug": "day-5-start",
@@ -465,7 +512,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-5-start/main.py"
   },
   {
     "slug": "day-6-start",
@@ -474,7 +522,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-6-start/main.py"
   },
   {
     "slug": "Day-7-Hangman-5-Start",
@@ -485,7 +534,8 @@
       "hangman_words.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "Day-7-Hangman-5-Start/main.py"
   },
   {
     "slug": "day-8-1-exercise",
@@ -495,7 +545,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-8-1-exercise/main.py"
   },
   {
     "slug": "day-8-2-exercise",
@@ -505,7 +556,8 @@
       "README.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-8-2-exercise/main.py"
   },
   {
     "slug": "day-8-start",
@@ -514,7 +566,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-8-start/main.py"
   },
   {
     "slug": "day-9-start",
@@ -523,7 +576,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "day-9-start/main.py"
   },
   {
     "slug": "etch-a-sketch-start",
@@ -532,7 +586,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "etch-a-sketch-start/main.py"
   },
   {
     "slug": "exercise-tracking-end",
@@ -541,7 +596,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "exercise-tracking-end/main.py"
   },
   {
     "slug": "flash-card-project-start",
@@ -552,6 +608,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "flash-card-project-start/main.py",
     "app": true
   },
   {
@@ -562,7 +619,8 @@
       "VENV.md",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "flight-club/main.py"
   },
   {
     "slug": "guess-the-number-start",
@@ -572,7 +630,8 @@
       "art.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "guess-the-number-start/main.py"
   },
   {
     "slug": "higher-lower-start",
@@ -583,7 +642,8 @@
       "game_data.py",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "higher-lower-start/main.py"
   },
   {
     "slug": "hirst_painting-start",
@@ -592,7 +652,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "hirst_painting-start/hirstpainting-start/main.py"
   },
   {
     "slug": "kanye-quotes-start",
@@ -602,6 +663,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "kanye-quotes-start/main.py",
     "app": true
   },
   {
@@ -622,7 +684,8 @@
       "Output/ReadyToSend/letter_for_Zuko.txt",
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "mail-merge-project-start/main.py"
   },
   {
     "slug": "mile-to-kilo-converter",
@@ -632,6 +695,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "mile-to-kilo-converter/main.py",
     "app": true
   },
   {
@@ -642,7 +706,8 @@
       "main.py",
       "nato_phonetic_alphabet.csv"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "NATO-alphabet-start/main.py"
   },
   {
     "slug": "oop-coffee-machine-start",
@@ -654,7 +719,8 @@
       "menu.py",
       "money_machine.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "oop-coffee-machine-start/main.py"
   },
   {
     "slug": "password-generator-start",
@@ -663,7 +729,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "password-generator-start/main.py"
   },
   {
     "slug": "password-manager-start",
@@ -673,6 +740,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "password-manager-start/main.py",
     "app": true
   },
   {
@@ -683,6 +751,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "pomodoro-start/main.py",
     "app": true
   },
   {
@@ -695,7 +764,8 @@
       "paddle.py",
       "scoreboard.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "pong-game/main.py"
   },
   {
     "slug": "quiz-game-start",
@@ -707,7 +777,8 @@
       "question_model.py",
       "quiz_brain.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "quiz-game-start/main.py"
   },
   {
     "slug": "quizzler-app-start",
@@ -721,6 +792,7 @@
       "ui.py"
     ],
     "entry": "main.py",
+    "src": "quizzler-app-start/main.py",
     "app": true
   },
   {
@@ -730,7 +802,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "rock-paper-scissors-start/main.py"
   },
   {
     "slug": "snake-game",
@@ -743,7 +816,8 @@
       "scoreboard.py",
       "snake.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "snake-game/main.py"
   },
   {
     "slug": "tip-calculator-start",
@@ -752,7 +826,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "tip-calculator-start/main.py"
   },
   {
     "slug": "tkinter-widget-demo",
@@ -762,6 +837,7 @@
       "main.py"
     ],
     "entry": "main.py",
+    "src": "tkinter-widget-demo/main.py",
     "app": true
   },
   {
@@ -771,7 +847,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "treasure-island-start/main.py"
   },
   {
     "slug": "turtle-crossing-start",
@@ -783,7 +860,8 @@
       "player.py",
       "scoreboard.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "turtle-crossing-start/main.py"
   },
   {
     "slug": "turtle-race-start",
@@ -792,7 +870,8 @@
     "files": [
       "main.py"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "turtle-race-start/main.py"
   },
   {
     "slug": "us-states-game-start",
@@ -803,6 +882,7 @@
       "main.py",
       "states_to_learn.csv"
     ],
-    "entry": "main.py"
+    "entry": "main.py",
+    "src": "us-states-game-start/main.py"
   }
 ]

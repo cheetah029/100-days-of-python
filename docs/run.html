@@ -91,7 +91,8 @@ async function init() {
   const subtitle = document.getElementById("subtitle");
   subtitle.textContent = `${meta.files.length} file${meta.files.length === 1 ? "" : "s"} · `;
   const srcLink = document.createElement("a");
-  srcLink.href = `https://github.com/cheetah029/100-days-of-python/tree/main/projects/${encodeURIComponent(slug)}`;
+  const srcPath = (meta.src || `${slug}/${meta.entry}`).split("/").map(encodeURIComponent).join("/");
+  srcLink.href = `https://github.com/cheetah029/100-days-of-python/blob/main/projects/${srcPath}`;
   srcLink.target = "_blank";
   srcLink.rel = "noopener";
   srcLink.textContent = "source code on GitHub";

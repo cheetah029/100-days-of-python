@@ -19,7 +19,7 @@ Per project:
     tkinter projects get "app": true only if docs/apps/<slug>/index.html exists.
 
 Outputs (under docs/):
-  data/manifest.json      - [{slug, title, type, files, entry[, app]}, ...]
+  data/manifest.json      - [{slug, title, type, files, entry, src[, app]}, ...]
   data/<slug>.json        - {slug, files: {filename: content}} (text files only)
 """
 
@@ -177,6 +177,17 @@ def collect_files(proj_dir: str, warn=None):
     return dict(sorted(collected.items()))
 
 
+def entry_src(slug: str, entry: str) -> str:
+    """Repo path of the entry file relative to projects/ (handles hoisted nested folders)."""
+    proj_dir = os.path.join(PROJECTS_DIR, slug)
+    if os.path.isfile(os.path.join(proj_dir, entry)):
+        return f"{slug}/{entry}"
+    for d in subdirs(proj_dir):
+        if os.path.isfile(os.path.join(proj_dir, d, entry)):
+            return f"{slug}/{d}/{entry}"
+    return f"{slug}/{entry}"
+
+
 def pick_entry(files: dict) -> str:
     if "main.py" in files:
         return "main.py"
@@ -225,6 +236,7 @@ def main() -> int:
             "type": ptype,
             "files": sorted(files.keys()),
             "entry": entry,
+            "src": entry_src(slug, entry) if entry else slug,
         }
         if ptype == "tkinter":
             item["app"] = os.path.isfile(os.path.join(APPS_DIR, slug, "index.html"))
