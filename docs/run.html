@@ -42,6 +42,7 @@ const SKULPT_URLS = [
   "https://skulpt.org/js/skulpt-stdlib.js"
 ];
 
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 const slug = new URLSearchParams(location.search).get("slug");
 const terminal = document.getElementById("terminal");
 const runBtn = document.getElementById("run-btn");
@@ -129,7 +130,17 @@ async function init() {
   document.getElementById("app").style.display = "block";
   runBtn.onclick = runProject;
   document.getElementById("clear-btn").onclick = clearTerminal;
-  document.getElementById("stop-btn").onclick = () => location.reload();
+  document.getElementById("stop-btn").onclick = () => {
+    // Reloading is the only way to stop a blocked program; remember where the
+    // page was scrolled so it comes back to the same position.
+    try { sessionStorage.setItem("stopScrollY", String(window.scrollY)); } catch (e) {}
+    location.reload();
+  };
+  try {
+    const y = Number(sessionStorage.getItem("stopScrollY"));
+    sessionStorage.removeItem("stopScrollY");
+    if (y > 0) { window.scrollTo(0, y); setTimeout(() => window.scrollTo(0, y), 50); }
+  } catch (e) {}
   if (meta.type === "turtle") {
     // Keep arrow keys / space from scrolling the page while playing turtle games.
     window.addEventListener("keydown", (e) => {
