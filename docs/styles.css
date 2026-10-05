@@ -10,6 +10,14 @@
   --amber: #d97706;
   --purple: #7c3aed;
   --border: #e3e7f0;
+  /* Code theme: shared by the code viewer and the markdown preview. */
+  --code-bg: #0f172a;
+  --code-ink: #e2e8f0;
+  --code-muted: #94a3b8;
+  --code-accent: #93c5fd;
+  --code-border: #334155;
+  --code-raised: #1e293b;
+  --code-deep: #0b0f1a;
   --radius: 12px;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
@@ -127,8 +135,8 @@ header.site a { color: #93c5fd; }
 .panel h2 { margin-top: 0; font-size: 1.2rem; }
 
 .code-view {
-  background: #0f172a;
-  color: #e2e8f0;
+  background: var(--code-bg);
+  color: var(--code-ink);
   border-radius: var(--radius);
   padding: 16px;
   overflow: auto;
@@ -137,11 +145,10 @@ header.site a { color: #93c5fd; }
   font-size: 0.85rem;
   white-space: pre;
 }
-/* Markdown preview: uses only the theme variables from :root so it follows the page. */
+/* Markdown preview: same code theme variables as .code-view, no colors of its own. */
 .md-view {
-  background: var(--card);
-  color: var(--ink);
-  border: 1px solid var(--border);
+  background: var(--code-bg);
+  color: var(--code-ink);
   border-radius: var(--radius);
   padding: 4px 20px 16px;
   overflow: auto;
@@ -155,12 +162,13 @@ header.site a { color: #93c5fd; }
 .md-view h3 { font-size: 1.05rem; }
 .md-view p, .md-view ul, .md-view ol { margin: 0.6em 0; }
 .md-view img { max-width: 100%; height: auto; }
-.md-view a { color: var(--accent); }
-.md-view blockquote { margin: 0.8em 0; padding: 2px 14px; border-left: 4px solid var(--border); color: var(--muted); }
-.md-view code { font-family: var(--mono); font-size: 0.85em; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
-.md-view pre { background: var(--bg); border: 1px solid var(--border); padding: 12px 14px; border-radius: 8px; overflow: auto; }
+.md-view a { color: var(--code-accent); }
+.md-view blockquote { margin: 0.8em 0; padding: 2px 14px; border-left: 4px solid var(--code-border); color: var(--code-muted); }
+.md-view code { font-family: var(--mono); font-size: 0.85em; background: var(--code-raised); padding: 1px 5px; border-radius: 4px; }
+.md-view pre { background: var(--code-deep); padding: 12px 14px; border-radius: 8px; overflow: auto; }
 .md-view pre code { background: none; padding: 0; }
-.md-view hr { border: 0; border-top: 1px solid var(--border); }
+.md-view hr { border: 0; border-top: 1px solid var(--code-border); }
+.md-view .status { color: var(--code-muted); }
 .terminal {
   background: #0b0f1a;
   color: #d1fae5;
