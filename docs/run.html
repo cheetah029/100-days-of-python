@@ -253,7 +253,7 @@ async function runConsole() {
     } finally {
       globals.destroy();
     }
-    termPrint("\n— finished —\n");
+    termPrint("\n(finished)\n");
   } catch (e) {
     termPrint("\n" + String(e && e.message ? e.message : e) + "\n", "err");
   } finally {
@@ -342,7 +342,7 @@ async function runTurtle() {
     }
     await Sk.misceval.asyncToPromise(() =>
       Sk.importMainWithBody("<stdin>", false, code, true));
-    termPrint("\n— finished —\n");
+    termPrint("\n(finished)\n");
   } catch (err) {
     termPrint((err && err.toString ? err.toString() : String(err)) + "\n", "err");
   } finally {

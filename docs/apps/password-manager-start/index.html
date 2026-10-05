@@ -76,13 +76,13 @@ function save() {
   const email = emailEl.value.trim();
   const password = passwordEl.value;
   if (!website || !email || !password) {
-    showMessage("Oops — please make sure you haven't left any fields empty.");
+    showMessage("Oops, please make sure you haven't left any fields empty.");
     return;
   }
   const data = loadData();
   data[website] = { email, password };
   saveData(data);
-  showMessage(`Success — added ${website} to the data store.`);
+  showMessage(`Success: added ${website} to the data store.`);
   websiteEl.value = "";
   passwordEl.value = "";
   websiteEl.focus();
@@ -92,13 +92,13 @@ function findPassword() {
   const website = websiteEl.value.trim();
   const data = loadData();
   if (!Object.keys(data).length) {
-    showMessage("Error — no data file found.");
+    showMessage("Error: no data file found.");
     return;
   }
   if (website in data) {
     showMessage(`${website}\nEmail: ${data[website].email}\nPassword: ${data[website].password}`);
   } else {
-    showMessage(`Error — no details for ${website} exist.`);
+    showMessage(`Error: no details for ${website} exist.`);
   }
 }
 
