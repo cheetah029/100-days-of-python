@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="wrap">
-  <a class="back-link" href="index.html">← Back to all projects</a>
+  <a class="back-link" href="https://aarongu.com/">← Back to all projects</a>
   <div id="loading" class="status">Loading project…</div>
   <div id="app" style="display:none">
     <h1 id="title" style="margin-bottom:4px"></h1>
@@ -358,7 +358,7 @@ init().catch(err => {
   msg.textContent = "Could not load project: " + String(err.message || err) + ".";
   const back = document.createElement("a");
   back.className = "back-link";
-  back.href = "index.html";
+  back.href = "https://aarongu.com/";
   back.textContent = "\u2190 Back to all projects";
   box.append(msg, document.createElement("br"), back);
   console.error(err);
