@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Run project — 100 Days of Python</title>
+<title>Run project: 100 Days of Python</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -88,7 +88,7 @@ async function init() {
   project = await dres.json();
   if (!project.files || !Object.keys(project.files).length) throw new Error(`"${slug}" has no files`);
 
-  document.title = `${meta.title} — 100 Days of Python`;
+  document.title = `${meta.title}: 100 Days of Python`;
   document.getElementById("title").textContent = meta.title;
   const subtitle = document.getElementById("subtitle");
   document.getElementById("file-count").textContent = `${meta.files.length} file${meta.files.length === 1 ? "" : "s"}`;
