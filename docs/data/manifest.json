@@ -726,6 +726,38 @@
     "src": "day-8-start/main.py"
   },
   {
+    "slug": "day-9-1-exercise",
+    "title": "Day 9-1 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py",
+    "src": "day-9-1-exercise/main.py"
+  },
+  {
+    "slug": "day-9-2-exercise",
+    "title": "Day 9-2 Exercise",
+    "type": "console",
+    "files": [
+      "README.md",
+      "main.py"
+    ],
+    "entry": "main.py",
+    "src": "day-9-2-exercise/main.py"
+  },
+  {
+    "slug": "day-9-end",
+    "title": "Day 9 End",
+    "type": "console",
+    "files": [
+      "main.py"
+    ],
+    "entry": "main.py",
+    "src": "day-9-end/main.py"
+  },
+  {
     "slug": "day-9-start",
     "title": "Day 9 Start",
     "type": "console",
