@@ -271,7 +271,7 @@ def _prepare_run():
 # exercise-tracking-end reads Nutritionix/Sheety credentials from the environment
 # and flight-club POSTs signups to a Sheety endpoint; neither can work in the
 # browser (no secrets here, no sockets in Pyodide), so both run in demo mode:
-# harmless placeholder credentials plus a fake `requests` that never sends.
+# harmless placeholder credentials plus a fake "requests" that never sends.
 _RUN_SLUG = globals().get("__run_slug", "")
 if _RUN_SLUG in ("exercise-tracking-end", "flight-club"):
     os.environ.setdefault("NT_APP_ID", "demo-app-id")
