@@ -70,6 +70,7 @@ function setButtons(on) {
 
 function nextQuestion() {
   card.style.background = "#fff";
+  card.classList.remove("answered");
   scoreEl.textContent = `Score: ${score}`;
   if (qIndex < questions.length) {
     questionEl.textContent = `Q.${qIndex + 1}: ${questions[qIndex].q}`;
@@ -84,6 +85,7 @@ function answer(userAnswer) {
   if (!accepting) return;
   setButtons(false);
   const correct = questions[qIndex].a.toLowerCase() === userAnswer.toLowerCase();
+  card.classList.add("answered");
   if (correct) { score++; card.style.background = "#16a34a"; }
   else { card.style.background = "#dc2626"; }
   qIndex++;
@@ -94,5 +96,6 @@ trueBtn.addEventListener("click", () => answer("True"));
 falseBtn.addEventListener("click", () => answer("False"));
 loadQuestions();
 </script>
+<script src="../code-panel.js" data-slug="quizzler-app-start"></script>
 </body>
 </html>

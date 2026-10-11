@@ -281,6 +281,9 @@ header.site a { color: #93c5fd; }
 .flashcard-face .word { font-size: 2.2rem; font-weight: 700; }
 .quiz-card {
   background: #fff;
+  /* The quizzler page sets color:#fff on body; without this the question text
+     is white on a white card and the card looks blank. */
+  color: var(--ink);
   border-radius: 12px;
   padding: 32px 24px;
   text-align: center;
@@ -290,8 +293,22 @@ header.site a { color: #93c5fd; }
   align-items: center;
   justify-content: center;
   border: 1px solid var(--border);
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
+/* Answer feedback paints the card green/red - switch to white text to stay legible. */
+.quiz-card.answered { color: #fff; }
+/* Code panel appended to the web-app pages. Needs its own card look because some
+   of those pages restyle .panel (quizzler makes panels transparent on a dark bg). */
+.code-panel {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--ink);
+  max-width: 900px;
+  margin: 24px auto 0;
+  text-align: left;
+}
+.code-panel h2, .code-panel .status { color: var(--ink); }
+.code-panel .status { color: var(--muted); }
 .quote-box {
   background: #fff;
   border-left: 5px solid var(--accent);

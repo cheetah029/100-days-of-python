@@ -60,25 +60,39 @@ function updateCount() {
   document.getElementById("left-count").textContent = `${toLearn.length} / ${WORDS.length}`;
 }
 
+// Matches "transition: transform 0.5s" on .flashcard-inner in styles.css.
+const FLIP_MS = 500;
+
 function nextCard() {
   clearTimeout(flipTimer);
-  if (!toLearn.length) {
-    document.getElementById("card-word").textContent = "Done! 🎉";
-    document.getElementById("card-lang").textContent = "";
-    document.getElementById("card-back-word").textContent = "You know all the words.";
-    document.getElementById("card").classList.remove("flipped");
+  const cardEl = document.getElementById("card");
+  // If the card is still showing its English side, turn it back BEFORE writing
+  // the next word. Filling the faces first meant the back face was already
+  // showing the next card's English while it turned, so you saw the answer for
+  // the length of the flip.
+  const wasFlipped = cardEl.classList.contains("flipped");
+  cardEl.classList.remove("flipped");
+
+  const show = () => {
+    if (!toLearn.length) {
+      document.getElementById("card-word").textContent = "Done! 🎉";
+      document.getElementById("card-lang").textContent = "";
+      document.getElementById("card-back-word").textContent = "You know all the words.";
+      updateCount();
+      return;
+    }
+    currentCard = toLearn[Math.floor(Math.random() * toLearn.length)];
+    document.getElementById("card-lang").textContent = "French";
+    document.getElementById("card-word").textContent = currentCard.f;
+    document.getElementById("card-back-word").textContent = currentCard.e;
+    flipTimer = setTimeout(() => {
+      document.getElementById("card").classList.add("flipped");
+    }, 3000);
     updateCount();
-    return;
-  }
-  currentCard = toLearn[Math.floor(Math.random() * toLearn.length)];
-  document.getElementById("card-lang").textContent = "French";
-  document.getElementById("card-word").textContent = currentCard.f;
-  document.getElementById("card-back-word").textContent = currentCard.e;
-  document.getElementById("card").classList.remove("flipped");
-  flipTimer = setTimeout(() => {
-    document.getElementById("card").classList.add("flipped");
-  }, 3000);
-  updateCount();
+  };
+
+  if (wasFlipped) flipTimer = setTimeout(show, FLIP_MS);
+  else show();
 }
 
 document.getElementById("unknown-btn").addEventListener("click", nextCard);
@@ -99,5 +113,6 @@ document.getElementById("card").addEventListener("click", () => {
 
 nextCard();
 </script>
+<script src="../code-panel.js" data-slug="flash-card-project-start"></script>
 </body>
 </html>

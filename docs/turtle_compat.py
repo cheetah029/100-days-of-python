@@ -198,40 +198,26 @@ if not getattr(_t, "_compat_applied", False):
             self._cp_materialize()
             return self._real.listen(*args, **kwargs)
 
-        def _cp_wait(self, until_click):
+        def _cp_wait(self):
+            """Keep the program alive so key/click handlers still run.
+
+            Skulpt returns from exitonclick() immediately, which ends a sketch
+            whose only loop is exitonclick (etch-a-sketch) before a single key
+            can arrive. Sleeping here suspends the program inside Skulpt and lets
+            the browser keep delivering events. Stop/Reset ends it - there is no
+            need to make anyone click the drawing.
+            """
             import time as _time
             self._cp_materialize()
-            clicked = [False]
-
-            def _on_click(x=None, y=None):
-                clicked[0] = True
-
-            attached = False
-            if until_click:
-                for attach in ("onscreenclick", "onclick"):
-                    fn = getattr(self._real, attach, None)
-                    if fn is None:
-                        continue
-                    try:
-                        fn(_on_click)
-                        attached = True
-                        break
-                    except Exception:
-                        continue
-            # Say which way out exists, so nobody is left staring at a finished
-            # drawing wondering why the Run button still says "Running".
-            if attached:
-                print("(click the drawing to finish)")
-            else:
-                print("(press Stop/Reset to finish)")
-            while not clicked[0]:
+            print("(still running - press Stop/Reset when you are done)")
+            while True:
                 _time.sleep(0.05)
 
         def exitonclick(self):
-            self._cp_wait(True)
+            self._cp_wait()
 
         def mainloop(self):
-            self._cp_wait(False)
+            self._cp_wait()
 
         done = mainloop
 
