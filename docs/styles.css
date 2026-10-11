@@ -214,19 +214,7 @@ header.site a { color: #93c5fd; }
 .file-tabs button.active { background: var(--ink); color: #fff; }
 
 #turtle-stage { text-align: center; }
-/* The drawing area is the same colour as the card, so mark its edges: without a
-   border you cannot tell where the canvas ends and a turtle has gone off-screen. */
-#turtle-canvas {
-  display: inline-block;
-  border: 2px solid var(--border);
-  border-radius: var(--radius);
-  background: #fff;
-  overflow: hidden;
-  max-width: 100%;
-}
-#turtle-canvas:empty { display: none; }
 #turtle-stage canvas, #turtle-stage > div { margin: 0 auto; }
-#turtle-canvas canvas { display: block; max-width: 100%; }
 
 .status { color: var(--muted); font-size: 0.9rem; margin: 10px 0; }
 
