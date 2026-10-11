@@ -107,6 +107,11 @@ termInput.addEventListener("keydown", (e) => {
 });
 // Clicking anywhere in the terminal puts the cursor back where you type.
 terminal.addEventListener("click", () => { if (pendingInput) termInput.focus(); });
+// Clicking the drawing hands keyboard focus to Skulpt, for the cases where the
+// automatic grab did not take.
+document.getElementById("turtle-stage").addEventListener("click", () => {
+  try { if (typeof Sk !== "undefined" && Sk.TurtleGraphics) Sk.TurtleGraphics.focus(); } catch (e) { /* ignore */ }
+});
 
 // Each run takes a generation number. Stop/Reset bumps it, which tells the run in
 // progress to abort at its next pause and keeps it from touching the page afterwards.
@@ -516,8 +521,22 @@ async function runTurtle() {
       }
     }
     if (gen !== runGen) return;
-    await Sk.misceval.asyncToPromise(() =>
-      Sk.importMainWithBody("<stdin>", false, code, true), stopCheck);
+    // Skulpt binds its key handlers to the canvas and only fires them when it has
+    // focus. Take focus as soon as the canvas appears: for an exitonclick sketch a
+    // click would end the program, so the user cannot be asked to click first.
+    let focusTries = 0;
+    const focusTimer = setInterval(() => {
+      if (++focusTries > 60 || gen !== runGen) { clearInterval(focusTimer); return; }
+      if (!document.querySelector("#turtle-canvas canvas")) return;
+      clearInterval(focusTimer);
+      try { Sk.TurtleGraphics.focus(); } catch (e) { /* older Skulpt: click to focus */ }
+    }, 250);
+    try {
+      await Sk.misceval.asyncToPromise(() =>
+        Sk.importMainWithBody("<stdin>", false, code, true), stopCheck);
+    } finally {
+      clearInterval(focusTimer);
+    }
     if (gen === runGen) termPrint("\n(finished)\n");
   } catch (err) {
     if (gen === runGen) termPrint((err && err.toString ? err.toString() : String(err)) + "\n", "err");
