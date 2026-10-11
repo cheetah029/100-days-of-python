@@ -40,7 +40,8 @@ function readLine(promptText) {
   Atomics.wait(ctl, 0, WAITING);
   if (Atomics.load(ctl, 0) === EOF) return null;
   const len = Atomics.load(ctl, 1);
-  return lineDec.decode(data.subarray(0, len));
+  // TextDecoder rejects views onto shared memory, so copy the bytes out first.
+  return lineDec.decode(new Uint8Array(data.subarray(0, len)));
 }
 
 // Hooks that pybootstrap.js expects on the global object.
