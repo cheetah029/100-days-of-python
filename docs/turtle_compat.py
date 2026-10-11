@@ -169,6 +169,72 @@ if not getattr(_t, "_compat_applied", False):
         def getcanvas(self):
             return None
 
+        # Skulpt returns from exitonclick()/mainloop() straight away, so a sketch
+        # whose only "loop" is exitonclick (etch-a-sketch) ended immediately and
+        # its key handlers never got a chance to fire. CPython blocks here until
+        # the window is clicked, so block too: sleeping inside Skulpt suspends the
+        # program and lets the browser deliver key and click events meanwhile.
+        def _cp_materialize(self):
+            """Force Skulpt to build its canvas.
+
+            Skulpt creates the canvas on the first drawing operation and binds the
+            key handlers to it, so a sketch that draws nothing until a key arrives
+            (etch-a-sketch) never got a canvas and never received the key. A
+            zero-length move by a hidden, pen-up turtle draws nothing but is enough.
+            screen.update() is not - it leaves the canvas uncreated.
+            """
+            if getattr(self, "_cp_materialized", False):
+                return
+            self._cp_materialized = True
+            try:
+                probe = _OrigTurtle()
+                probe.hideturtle()
+                probe.penup()
+                probe.forward(0)
+            except Exception:
+                pass
+
+        def listen(self, *args, **kwargs):
+            self._cp_materialize()
+            return self._real.listen(*args, **kwargs)
+
+        def _cp_wait(self, until_click):
+            import time as _time
+            self._cp_materialize()
+            clicked = [False]
+
+            def _on_click(x=None, y=None):
+                clicked[0] = True
+
+            attached = False
+            if until_click:
+                for attach in ("onscreenclick", "onclick"):
+                    fn = getattr(self._real, attach, None)
+                    if fn is None:
+                        continue
+                    try:
+                        fn(_on_click)
+                        attached = True
+                        break
+                    except Exception:
+                        continue
+            # Say which way out exists, so nobody is left staring at a finished
+            # drawing wondering why the Run button still says "Running".
+            if attached:
+                print("(click the drawing to finish)")
+            else:
+                print("(press Stop/Reset to finish)")
+            while not clicked[0]:
+                _time.sleep(0.05)
+
+        def exitonclick(self):
+            self._cp_wait(True)
+
+        def mainloop(self):
+            self._cp_wait(False)
+
+        done = mainloop
+
     _screen_singleton = []
 
     def Screen():
@@ -194,6 +260,14 @@ if not getattr(_t, "_compat_applied", False):
     def onkeypress(fun, key=None):
         Screen().onkeypress(fun, key)
 
+    def exitonclick():
+        return Screen().exitonclick()
+
+    def mainloop():
+        return Screen().mainloop()
+
+    done = mainloop
+
     def onkeyrelease(fun, key=None):
         pass
 
@@ -206,6 +280,9 @@ if not getattr(_t, "_compat_applied", False):
     _t.numinput = numinput
     _t.onkeypress = onkeypress
     _t.onkeyrelease = onkeyrelease
+    _t.exitonclick = exitonclick
+    _t.mainloop = mainloop
+    _t.done = done
     if not hasattr(_t, "RawTurtle"):
         _t.RawTurtle = Turtle
 
