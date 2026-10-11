@@ -488,8 +488,13 @@ async function runTurtle() {
       throw "File not found: '" + x + "'";
     },
     // Skulpt runs under asyncToPromise, so inputfun may return a promise and the
-    // program suspends until the user types a line into the terminal.
-    inputfun: () => askLine().then((v) => (v === null ? "" : v)),
+    // program suspends until the user types a line into the terminal. Skulpt hands
+    // the prompt to us rather than printing it (window.prompt used to show it in
+    // the dialog), so echo it first or the question is invisible.
+    inputfun: (promptText) => {
+      if (promptText) termPrint(String(promptText));
+      return askLine().then((v) => (v === null ? "" : v));
+    },
     inputfunTakesPrompt: true,
     __future__: Sk.python3
   });
