@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Run project: 100 Days of Python</title>
 <link rel="stylesheet" href="styles.css">
+<script src="coi-serviceworker.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -27,11 +28,11 @@
       <div class="row" style="margin-bottom:12px">
         <button class="btn" id="run-btn">▶ Run</button>
         <button class="btn secondary" id="clear-btn">Clear Output</button>
-        <button class="btn secondary" id="stop-btn" title="Reload the page to stop a running program">Stop/Reset</button>
+        <button class="btn secondary" id="stop-btn" title="Stop the running program">Stop/Reset</button>
       </div>
       <div id="turtle-stage" style="display:none"><div id="turtle-canvas"></div></div>
-      <div class="terminal" id="terminal">Press Run to execute.</div>
-      <p class="status">Console projects that ask for input will pop up a prompt dialog. Some projects need the network, images or other files that can't run in a browser, so any errors are shown above. Use "Stop/Reset" to stop a running game.</p>
+      <div class="terminal" id="terminal"><span id="term-out">Press Run to execute.</span><span class="term-input-line" id="term-input-line" hidden><span class="term-caret">&gt;</span><input id="term-input" class="term-input" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Program input"></span></div>
+      <p class="status">Console projects that ask for input let you type straight into the terminal. Some projects need the network, images or other files that can't run in a browser, so any errors are shown above. Use "Stop/Reset" to stop a running game.</p>
     </div>
   </div>
 </div>
@@ -47,8 +48,14 @@ const SKULPT_URLS = [
   "https://skulpt.org/js/skulpt-stdlib.js"
 ];
 
+// Resources sit next to this page in production; a staging copy one directory
+// deeper sets <html data-base="../"> so it can reuse the same data files.
+const BASE = document.documentElement.dataset.base || "";
 const slug = new URLSearchParams(location.search).get("slug");
 const terminal = document.getElementById("terminal");
+const termOut = document.getElementById("term-out");
+const termInputLine = document.getElementById("term-input-line");
+const termInput = document.getElementById("term-input");
 const runBtn = document.getElementById("run-btn");
 let project = null;   // {slug, files}
 let meta = null;      // manifest entry
@@ -59,10 +66,47 @@ function termPrint(text, cls) {
   const span = document.createElement("span");
   if (cls) span.className = cls;
   span.textContent = text;
-  terminal.appendChild(span);
+  termOut.appendChild(span);
   terminal.scrollTop = terminal.scrollHeight;
 }
-function clearTerminal() { terminal.innerHTML = ""; }
+function clearTerminal() { termOut.textContent = ""; }
+
+// ---------- Live input line ----------
+// Shown when the running program asks for input. Resolves with the typed line,
+// or null if the run was stopped while waiting.
+let pendingInput = null;
+
+function askLine() {
+  return new Promise((resolve) => {
+    pendingInput = resolve;
+    termInputLine.hidden = false;
+    termInput.value = "";
+    termInput.focus();
+    terminal.scrollTop = terminal.scrollHeight;
+  });
+}
+function submitLine() {
+  if (!pendingInput) return;
+  const value = termInput.value;
+  const resolve = pendingInput;
+  pendingInput = null;
+  termInputLine.hidden = true;
+  termInput.value = "";
+  termPrint(value + "\n");   // echo it, the way a real terminal would
+  resolve(value);
+}
+function hideInputLine() {
+  termInputLine.hidden = true;
+  if (!pendingInput) return;
+  const resolve = pendingInput;
+  pendingInput = null;
+  resolve(null);
+}
+termInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") { e.preventDefault(); submitLine(); }
+});
+// Clicking anywhere in the terminal puts the cursor back where you type.
+terminal.addEventListener("click", () => { if (pendingInput) termInput.focus(); });
 
 // Each run takes a generation number. Stop/Reset bumps it, which tells the run in
 // progress to abort at its next pause and keeps it from touching the page afterwards.
@@ -79,7 +123,9 @@ function discardTurtle() {
 let pageTitle = document.title;   // games can change the tab title; reset restores it
 function resetRun() {
   runGen++;
-  terminal.textContent = "Press Run to execute.";
+  stopWorker();
+  hideInputLine();
+  termOut.textContent = "Press Run to execute.";
   document.title = pageTitle;
   discardTurtle();
   runBtn.disabled = false;
@@ -105,6 +151,10 @@ function ensureMarkdown() {
 function loadScript(src) {
   return new Promise((resolve, reject) => {
     const s = document.createElement("script");
+    // Under cross-origin isolation a no-cors script is blocked outright. Asking for
+    // CORS satisfies require-corp for hosts that send Access-Control-Allow-Origin
+    // (skulpt.org sends that but no Cross-Origin-Resource-Policy).
+    if (/^https?:\/\//i.test(src) && src.indexOf(location.origin) !== 0) s.crossOrigin = "anonymous";
     s.src = src;
     s.onload = resolve;
     s.onerror = () => reject(new Error("Failed to load " + src));
@@ -114,7 +164,7 @@ function loadScript(src) {
 
 async function init() {
   if (!slug) throw new Error("No ?slug= given.");
-  const mres = await fetch("data/manifest.json");
+  const mres = await fetch(BASE + "data/manifest.json");
   if (!mres.ok) throw new Error(`Could not load the project list (HTTP ${mres.status})`);
   const manifest = await mres.json();
   meta = manifest.find(p => p.slug === slug);
@@ -122,13 +172,13 @@ async function init() {
   if (meta.app) {
     // Projects with a hand-written web version (tkinter apps, us-states-game)
     // run there instead of in the Python runners.
-    location.replace(`apps/${encodeURIComponent(slug)}/`);
+    location.replace(BASE + `apps/${encodeURIComponent(slug)}/`);
     return;
   }
   if (meta.type === "tkinter") {
     throw new Error(`"${meta.title}" is a desktop app and its web version hasn't been built yet`);
   }
-  const dres = await fetch(`data/${encodeURIComponent(slug)}.json`);
+  const dres = await fetch(BASE + `data/${encodeURIComponent(slug)}.json`);
   if (!dres.ok) throw new Error(`Could not load files for "${slug}" (HTTP ${dres.status})`);
   project = await dres.json();
   if (!project.files || !Object.keys(project.files).length) throw new Error(`"${slug}" has no files`);
@@ -220,84 +270,76 @@ async function init() {
 }
 
 // ---------- Console: Pyodide ----------
-// Python-side helpers: input() via prompt dialog, a stand-in for Replit's
-// `replit.clear`, os.system("clear"), and per-run cleanup so Run can be pressed repeatedly.
-const BOOTSTRAP_PY = String.raw`
-import builtins, os, sys, types, shutil, js
+// Python runs in a worker whenever the page is cross-origin isolated, so input()
+// can park on Atomics.wait while the page keeps taking keystrokes. Without
+// isolation there is no SharedArrayBuffer, so we fall back to running Pyodide on
+// this thread, where the only way to block is a prompt dialog.
+const CAN_USE_WORKER =
+  typeof SharedArrayBuffer !== "undefined" &&
+  typeof Atomics !== "undefined" &&
+  self.crossOriginIsolated === true;
 
-def _clear_screen(*_a, **_k):
-    js.window.clearTerminal()
+const CTL_BYTES = 8, LINE_BYTES = 65536;
+const ST_WAITING = 0, ST_READY = 1, ST_EOF = 2;
+// Bump WORKER_VERSION whenever pyworker.js changes: GitHub Pages serves it with
+// max-age=600, and a stale worker paired with a fresh page silently misbehaves.
+const WORKER_VERSION = "2";
+let worker = null, workerCtl = null, workerData = null;
 
-def _web_input(prompt=""):
-    text = "" if prompt is None else str(prompt)
-    if text:
-        sys.stdout.write(text)
-        sys.stdout.flush()
-    v = js.window.prompt(text)
-    if v is None:
-        raise EOFError("input cancelled by user")
-    print(v)
-    return v
-builtins.input = _web_input
+function startWorker() {
+  const sab = new SharedArrayBuffer(CTL_BYTES + LINE_BYTES);
+  workerCtl = new Int32Array(sab, 0, 2);
+  workerData = new Uint8Array(sab, CTL_BYTES);
+  worker = new Worker("pyworker.js?v=" + WORKER_VERSION);
+  worker.onmessage = onWorkerMessage;
+  worker.onerror = (e) => {
+    termPrint("\n" + (e.message || "The Python worker failed to start.") + "\n", "err");
+    finishRun();
+  };
+  worker.postMessage({ type: "init", sab, slug });
+  return worker;
+}
 
-_replit = types.ModuleType("replit")
-_replit.clear = _clear_screen
-sys.modules["replit"] = _replit
+// Terminating is the only reliable way to stop a worker that is mid-loop or
+// parked in Atomics.wait; the next Run builds a fresh one.
+function stopWorker() {
+  if (!worker) return;
+  worker.terminate();
+  worker = null;
+  workerCtl = null;
+  workerData = null;
+}
 
-_real_system = os.system
-def _system(cmd):
-    if str(cmd).strip() in ("clear", "cls"):
-        _clear_screen()
-        return 0
-    return 0
-os.system = _system
+// Hand the typed line to the parked worker and wake it.
+function answerWorker(line) {
+  if (!workerCtl) return;
+  if (line === null) {
+    Atomics.store(workerCtl, 0, ST_EOF);
+  } else {
+    const bytes = new TextEncoder().encode(line);
+    const n = Math.min(bytes.length, workerData.length);
+    workerData.set(bytes.subarray(0, n));
+    Atomics.store(workerCtl, 1, n);
+    Atomics.store(workerCtl, 0, ST_READY);
+  }
+  Atomics.notify(workerCtl, 0);
+}
 
-PROJECT_DIR = "/home/pyodide/project"
+function finishRun() {
+  hideInputLine();
+  runBtn.disabled = false;
+  runBtn.textContent = "\u25B6 Run";
+}
 
-def _prepare_run():
-    """Fresh project dir + forget modules imported from a previous run."""
-    os.chdir("/home/pyodide")
-    for name, mod in list(sys.modules.items()):
-        f = getattr(mod, "__file__", None) or ""
-        if f.startswith(PROJECT_DIR + "/"):
-            del sys.modules[name]
-    shutil.rmtree(PROJECT_DIR, ignore_errors=True)
-    os.makedirs(PROJECT_DIR)
-    os.chdir(PROJECT_DIR)
-    if PROJECT_DIR not in sys.path:
-        sys.path.insert(0, PROJECT_DIR)
-
-# Demo shims for projects that need API keys / network access.
-# exercise-tracking-end reads Nutritionix/Sheety credentials from the environment
-# and flight-club POSTs signups to a Sheety endpoint; neither can work in the
-# browser (no secrets here, no sockets in Pyodide), so both run in demo mode:
-# harmless placeholder credentials plus a fake "requests" that never sends.
-_RUN_SLUG = globals().get("__run_slug", "")
-if _RUN_SLUG in ("exercise-tracking-end", "flight-club"):
-    os.environ.setdefault("NT_APP_ID", "demo-app-id")
-    os.environ.setdefault("NT_API_KEY", "demo-api-key")
-    os.environ.setdefault("SHEET_API_ENDPOINT", "https://example.invalid/demo-sheet")
-    os.environ.setdefault("TOKEN", "demo-token")
-
-    class _DemoResponse:
-        status_code = 200
-        text = '{"ok": true}  (demo mode — nothing was actually sent)'
-        def json(self):
-            return {"exercises": [
-                {"name": "running", "duration_min": 30, "nf_calories": 300},
-                {"name": "cycling", "duration_min": 45, "nf_calories": 400},
-            ]}
-
-    def _demo_post(url, json=None, headers=None, **kwargs):
-        print(f"[demo mode] POST {url} — not actually sent.")
-        return _DemoResponse()
-
-    _requests_stub = types.ModuleType("requests")
-    _requests_stub.post = _demo_post
-    _requests_stub.get = _demo_post
-    sys.modules["requests"] = _requests_stub
-    print(f"[demo mode] {_RUN_SLUG}: API calls are simulated; nothing leaves your browser.")
-`;
+function onWorkerMessage(e) {
+  const m = e.data || {};
+  if (m.type === "out") termPrint(m.text, m.cls);
+  else if (m.type === "clear") clearTerminal();
+  else if (m.type === "status") { runBtn.disabled = true; runBtn.textContent = m.text; }
+  else if (m.type === "input") askLine().then(answerWorker);
+  else if (m.type === "done") { termPrint("\n(finished)\n"); finishRun(); }
+  else if (m.type === "error") { termPrint("\n" + m.message + "\n", "err"); finishRun(); }
+}
 
 async function ensurePyodide() {
   if (pyodide) return pyodide;
@@ -308,12 +350,20 @@ async function ensurePyodide() {
     pyodide = await loadPyodide();
     // Stream raw chunks so partial lines (e.g. input prompts) show immediately and
     // newlines are preserved ("batched" mode strips them).
-    const dec = new TextDecoder();
-    pyodide.setStdout({ write: (buf) => { termPrint(dec.decode(buf, { stream: true })); return buf.length; } });
-    pyodide.setStderr({ write: (buf) => { termPrint(dec.decode(buf, { stream: true }), "err"); return buf.length; } });
-    window.clearTerminal = clearTerminal;
+    const outDec = new TextDecoder(), errDec = new TextDecoder();
+    pyodide.setStdout({ write: (buf) => { termPrint(outDec.decode(buf, { stream: true })); return buf.length; } });
+    pyodide.setStderr({ write: (buf) => { termPrint(errDec.decode(buf, { stream: true }), "err"); return buf.length; } });
+    // Hooks pybootstrap.js calls. No SharedArrayBuffer on this path, so blocking
+    // for a line means a dialog; echo it so the transcript still reads correctly.
+    window.pyInput = (text) => {
+      const v = window.prompt(text);
+      if (v !== null) termPrint(v + "\n");
+      return v;
+    };
+    window.pyClear = clearTerminal;
     pyodide.globals.set("__run_slug", slug);
-    await pyodide.runPythonAsync(BOOTSTRAP_PY);
+    await loadScript("pybootstrap.js");
+    await pyodide.runPythonAsync(self.BOOTSTRAP_PY);
   } catch (e) {
     pyodide = null;
     throw e;
@@ -326,11 +376,21 @@ async function ensurePyodide() {
 
 async function runConsole() {
   const gen = ++runGen;
-  const py = await ensurePyodide();
-  if (gen !== runGen) return;
   clearTerminal();
   runBtn.disabled = true;
   runBtn.textContent = "Running…";
+  if (CAN_USE_WORKER) {
+    if (!worker) startWorker();
+    worker.postMessage({ type: "run", files: project.files, entry: meta.entry });
+    return;   // output, input requests and completion all arrive as messages
+  }
+  await runConsoleOnMainThread(gen);
+}
+
+// Fallback for browsers/contexts without cross-origin isolation.
+async function runConsoleOnMainThread(gen) {
+  const py = await ensurePyodide();
+  if (gen !== runGen) return;
   try {
     py.runPython("_prepare_run()");
     // Write every project file into the virtual FS so imports + data files work.
@@ -390,7 +450,7 @@ async function runTurtle() {
   if (gen !== runGen) return;
   if (turtleCompat === null) {
     try {
-      const r = await fetch("turtle_compat.py");
+      const r = await fetch(BASE + "turtle_compat.py");
       turtleCompat = r.ok ? await r.text() : "";
     } catch (e) { turtleCompat = ""; }
   }
@@ -427,10 +487,9 @@ async function runTurtle() {
         return Sk.builtinFiles.files[x];
       throw "File not found: '" + x + "'";
     },
-    inputfun: (prompt) => {
-      const v = window.prompt(prompt);
-      return v === null ? "" : v;
-    },
+    // Skulpt runs under asyncToPromise, so inputfun may return a promise and the
+    // program suspends until the user types a line into the terminal.
+    inputfun: () => askLine().then((v) => (v === null ? "" : v)),
     inputfunTakesPrompt: true,
     __future__: Sk.python3
   });
