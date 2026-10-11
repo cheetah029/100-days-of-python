@@ -110,7 +110,7 @@ terminal.addEventListener("click", () => { if (pendingInput) termInput.focus(); 
 // Clicking the drawing hands keyboard focus to Skulpt, for the cases where the
 // automatic grab did not take.
 document.getElementById("turtle-stage").addEventListener("click", () => {
-  try { if (typeof Sk !== "undefined" && Sk.TurtleGraphics) Sk.TurtleGraphics.focus(); } catch (e) { /* ignore */ }
+  try { document.getElementById("turtle-canvas").focus(); } catch (e) { /* ignore */ }
 });
 
 // Each run takes a generation number. Stop/Reset bumps it, which tells the run in
@@ -256,7 +256,7 @@ async function init() {
     document.getElementById("turtle-stage").style.display = "block";
     const hint = document.createElement("p");
     hint.className = "hint";
-    hint.textContent = "Tip: click the canvas once so it has keyboard focus, then use the arrow keys / on-screen controls.";
+    hint.textContent = "Tip: the drawing takes keyboard focus automatically - just use the arrow keys. Click it again if focus is lost.";
     document.getElementById("turtle-stage").appendChild(hint);
   }
 
@@ -529,7 +529,10 @@ async function runTurtle() {
       if (++focusTries > 60 || gen !== runGen) { clearInterval(focusTimer); return; }
       if (!document.querySelector("#turtle-canvas canvas")) return;
       clearInterval(focusTimer);
-      try { Sk.TurtleGraphics.focus(); } catch (e) { /* older Skulpt: click to focus */ }
+      // Skulpt puts tabindex="0" on the host div and listens for keys there, so
+      // plain DOM focus is what actually works; Sk.TurtleGraphics.focus() does not
+      // move document.activeElement.
+      try { document.getElementById("turtle-canvas").focus(); } catch (e) { /* ignore */ }
     }, 250);
     try {
       await Sk.misceval.asyncToPromise(() =>
