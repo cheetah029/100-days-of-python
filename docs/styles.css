@@ -186,6 +186,8 @@ header.site a { color: #93c5fd; }
 
 /* Live input line: a bare input styled to disappear into the terminal text. */
 .term-input-line { display: flex; align-items: baseline; gap: 6px; }
+/* display:flex would otherwise beat the UA stylesheet's [hidden] rule. */
+.term-input-line[hidden] { display: none; }
 .term-caret { color: #34d399; flex: none; }
 .term-input {
   flex: 1 1 auto;
