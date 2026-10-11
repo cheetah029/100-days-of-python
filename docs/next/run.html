@@ -281,13 +281,16 @@ const CAN_USE_WORKER =
 
 const CTL_BYTES = 8, LINE_BYTES = 65536;
 const ST_WAITING = 0, ST_READY = 1, ST_EOF = 2;
+// Bump WORKER_VERSION whenever pyworker.js changes: GitHub Pages serves it with
+// max-age=600, and a stale worker paired with a fresh page silently misbehaves.
+const WORKER_VERSION = "2";
 let worker = null, workerCtl = null, workerData = null;
 
 function startWorker() {
   const sab = new SharedArrayBuffer(CTL_BYTES + LINE_BYTES);
   workerCtl = new Int32Array(sab, 0, 2);
   workerData = new Uint8Array(sab, CTL_BYTES);
-  worker = new Worker("pyworker.js");
+  worker = new Worker("pyworker.js?v=" + WORKER_VERSION);
   worker.onmessage = onWorkerMessage;
   worker.onerror = (e) => {
     termPrint("\n" + (e.message || "The Python worker failed to start.") + "\n", "err");
