@@ -184,6 +184,21 @@ header.site a { color: #93c5fd; }
 }
 .terminal .err { color: #fca5a5; }
 
+/* Live input line: a bare input styled to disappear into the terminal text. */
+.term-input-line { display: flex; align-items: baseline; gap: 6px; }
+.term-caret { color: #34d399; flex: none; }
+.term-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  caret-color: #34d399;
+}
+
 .file-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
 .file-tabs button {
   font-family: var(--mono);
